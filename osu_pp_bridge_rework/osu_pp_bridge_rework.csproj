@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <RollForward>Major</RollForward>
+  </PropertyGroup>
+
+  <!--
+    Floating * version — always pulls the latest ppy algorithm.
+    Run `dotnet build` here to update to rework when it ships.
+    Do NOT update osu_pp_bridge/ (the current-version bridge).
+  -->
+  <ItemGroup>
+    <PackageReference Include="ppy.osu.Game"              Version="*" />
+    <PackageReference Include="ppy.osu.Game.Rulesets.Osu" Version="*" />
+  </ItemGroup>
+
+</Project>

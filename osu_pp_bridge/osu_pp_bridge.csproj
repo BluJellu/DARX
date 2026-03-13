@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <RollForward>Major</RollForward>
+  </PropertyGroup>
+
+  <!--
+    ppy publishes osu! packages to their own NuGet feed.
+    NuGet.Config in this directory points dotnet restore there.
+    Using floating * versions so you always get the latest algorithm
+    when you run `dotnet build` again.
+  -->
+  <ItemGroup>
+    <PackageReference Include="ppy.osu.Game"              Version="*" />
+    <PackageReference Include="ppy.osu.Game.Rulesets.Osu" Version="*" />
+  </ItemGroup>
+
+</Project>

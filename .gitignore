@@ -1,0 +1,29 @@
+# Personal credentials — never commit this
+config.ini
+
+# Personal score database
+rx_scores.db
+
+# .osu file download cache
+.cache/
+
+# Bridge build output
+osu_pp_bridge/bin/
+osu_pp_bridge/obj/
+osu_pp_bridge_rework/bin/
+osu_pp_bridge_rework/obj/
+
+# Export output
+rx_scores.txt
+
+# Beatmapset ID cache (regenerated automatically)
+.beatmapset_cache.json
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# OS junk
+.DS_Store
+Thumbs.db
