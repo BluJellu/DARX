@@ -7,6 +7,33 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
+@font-face {
+    font-family: 'Torus';
+    src: url('https://osu.ppy.sh/fonts/Torus-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Torus';
+    src: url('https://osu.ppy.sh/fonts/Torus-SemiBold.woff2') format('woff2');
+    font-weight: 600;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Torus';
+    src: url('https://osu.ppy.sh/fonts/Torus-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Torus';
+    src: url('https://osu.ppy.sh/fonts/Torus-Heavy.woff2') format('woff2');
+    font-weight: 900;
+    font-display: swap;
+}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
@@ -73,17 +100,6 @@ body::after {
     margin-bottom: 56px;
 }
 
-.header-eyebrow {
-    font-family: 'Space Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: var(--pink);
-    margin-bottom: 16px;
-    opacity: 0;
-    animation: fadeUp 0.6s ease forwards;
-}
-
 .header-title {
     font-family: 'Syne', sans-serif;
     font-size: clamp(36px, 6vw, 64px);
@@ -123,14 +139,14 @@ body::after {
 }
 
 .hs-val {
-    font-family: 'Space Mono', monospace;
+    font-family: 'Torus', 'Space Mono', monospace;
     font-size: 22px;
-    font-weight: 700;
+    font-weight: 900;
     color: var(--yellow);
+    letter-spacing: -0.01em;
 }
 
 .hs-val.rework { color: var(--pink); }
-.hs-val.count  { color: var(--text-dim); font-size: 16px; }
 
 .header-divider {
     width: 1px;
@@ -185,31 +201,19 @@ body::after {
     box-shadow: 0 8px 32px rgba(0,0,0,0.4), -4px 0 0 var(--pink);
 }
 
-/* beatmap background strip */
+/* beatmap background — full card width, no fade */
 .score-bg {
     position: absolute;
-    left: 0;
-    top: 0;
-    width: 220px;
-    height: 100%;
+    inset: 0;
     background-size: cover;
     background-position: center;
     background-color: #1a1a2e;
-    flex-shrink: 0;
 }
 
 .score-bg-overlay {
     position: absolute;
-    left: 0;
-    top: 0;
-    width: 220px;
-    height: 100%;
-    background: linear-gradient(
-        to right,
-        rgba(8,8,15,0.3) 0%,
-        rgba(8,8,15,0.85) 70%,
-        rgba(15,15,26,1) 100%
-    );
+    inset: 0;
+    background: rgba(6, 6, 14, 0.55);
 }
 
 /* rank number */
@@ -284,11 +288,12 @@ body::after {
 }
 
 .score-pp {
-    font-family: 'Space Mono', monospace;
-    font-size: 20px;
-    font-weight: 700;
+    font-family: 'Torus', 'Space Mono', monospace;
+    font-size: 22px;
+    font-weight: 900;
     color: var(--yellow);
     line-height: 1;
+    letter-spacing: -0.01em;
 }
 
 .pp-unit {
@@ -299,7 +304,7 @@ body::after {
 }
 
 .pp-rework {
-    font-family: 'Space Mono', monospace;
+    font-family: 'Torus', 'Space Mono', monospace;
     font-size: 11px;
     color: var(--pink);
     margin-top: 3px;
@@ -339,6 +344,30 @@ body::after {
 .stat-50          { color: #fd79a8; }
 .stat-fc          { color: var(--green); }
 
+/* ── PP Chart ── */
+.chart-wrap {
+    margin-bottom: 52px;
+    opacity: 0;
+    animation: fadeUp 0.6s 0.28s ease forwards;
+}
+.chart-canvas-wrap {
+    position: relative;
+    height: 180px;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    padding: 12px 16px 8px;
+}
+.chart-title {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 10px;
+}
+
 /* ── Footer ── */
 .footer {
     text-align: center;
@@ -376,8 +405,7 @@ body::after {
 <div class="page-wrap">
 
     <div class="header">
-        <div class="header-eyebrow">DA+RX top plays</div>
-        <h1 class="header-title">My Best Scores</h1>
+        <h1 class="header-title">DA+RX Top Plays</h1>
         <div class="header-stats">
             <div class="header-stat">
                 <span class="hs-label">total pp</span>
@@ -385,15 +413,17 @@ body::after {
             </div>
             
             
-            <div class="header-divider"></div>
-            <div class="header-stat">
-                <span class="hs-label">maps</span>
-                <span class="hs-val count">200</span>
-            </div>
         </div>
     </div>
 
     <div style="text-align:center"><div class="filter-pill">● RANKED+LOVED</div></div>
+
+    <div class="chart-wrap">
+        <div class="chart-canvas-wrap">
+            <div class="chart-title">pp over time</div>
+            <canvas id="ppChart"></canvas>
+        </div>
+    </div>
 
     <div class="scores-list">
 
@@ -641,7 +671,7 @@ body::after {
                     <span class="score-stars">★ 9.44</span>
                     <span class="score-acc acc-ss">100.00%</span>
                     <span class="score-combo">2,163x</span>
-                    <span class="score-hits"><span class="stat-fc">FC</span></span>
+                    <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.5  OD0  CS0  HP0) RX</span>
                     <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
@@ -741,7 +771,7 @@ body::after {
                     <span class="score-stars">★ 9.32</span>
                     <span class="score-acc acc-ss">100.00%</span>
                     <span class="score-combo">2,402x</span>
-                    <span class="score-hits"><span class="stat-fc">FC</span></span>
+                    <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.4  OD0  CS0  HP0) RX</span>
                     <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
@@ -791,7 +821,7 @@ body::after {
                     <span class="score-stars">★ 9.73</span>
                     <span class="score-acc acc-ss">100.00%</span>
                     <span class="score-combo">1,381x</span>
-                    <span class="score-hits"><span class="stat-fc">FC</span></span>
+                    <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.6  OD0  CS0  HP0) RX</span>
                     <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
@@ -841,7 +871,7 @@ body::after {
                     <span class="score-stars">★ 9.14</span>
                     <span class="score-acc acc-ss">100.00%</span>
                     <span class="score-combo">1,820x</span>
-                    <span class="score-hits"><span class="stat-fc">FC</span></span>
+                    <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.5  OD0  CS0  HP0) RX</span>
                     <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
@@ -941,7 +971,7 @@ body::after {
                     <span class="score-stars">★ 10.01</span>
                     <span class="score-acc acc-ss">100.00%</span>
                     <span class="score-combo">523x</span>
-                    <span class="score-hits"><span class="stat-fc">FC</span></span>
+                    <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.5  OD0  CS0  HP0) RX</span>
                     <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
@@ -966,7 +996,7 @@ body::after {
                     <span class="score-stars">★ 8.98</span>
                     <span class="score-acc acc-ss">100.00%</span>
                     <span class="score-combo">3,233x</span>
-                    <span class="score-hits"><span class="stat-fc">FC</span></span>
+                    <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.5  OD0  CS0  HP0) RX</span>
                     <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
@@ -991,7 +1021,7 @@ body::after {
                     <span class="score-stars">★ 9.69</span>
                     <span class="score-acc acc-ss">100.00%</span>
                     <span class="score-combo">1,277x</span>
-                    <span class="score-hits"><span class="stat-fc">FC</span></span>
+                    <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">HD DT RX DA(AR9.7  OD0  CS0  HP0)</span>
                     <span class="score-status" style="color:#ff79c6">loved</span>
                 </div>
@@ -1066,7 +1096,7 @@ body::after {
                     <span class="score-stars">★ 10.06</span>
                     <span class="score-acc acc-ss">100.00%</span>
                     <span class="score-combo">333x</span>
-                    <span class="score-hits"><span class="stat-fc">FC</span></span>
+                    <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.5  OD0  CS0  HP0) RX</span>
                     <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
@@ -1166,7 +1196,7 @@ body::after {
                     <span class="score-stars">★ 9.78</span>
                     <span class="score-acc acc-ss">100.00%</span>
                     <span class="score-combo">968x</span>
-                    <span class="score-hits"><span class="stat-fc">FC</span></span>
+                    <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.6  OD0  CS0  HP0) RX</span>
                     <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
@@ -1341,7 +1371,7 @@ body::after {
                     <span class="score-stars">★ 9.43</span>
                     <span class="score-acc acc-ss">100.00%</span>
                     <span class="score-combo">1,531x</span>
-                    <span class="score-hits"><span class="stat-fc">FC</span></span>
+                    <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">NC HD DA(AR9.6  OD0  CS0  HP0) RX</span>
                     <span class="score-status" style="color:#ff79c6">loved</span>
                 </div>
@@ -1566,7 +1596,7 @@ body::after {
                     <span class="score-stars">★ 9.59</span>
                     <span class="score-acc acc-ss">100.00%</span>
                     <span class="score-combo">913x</span>
-                    <span class="score-hits"><span class="stat-fc">FC</span></span>
+                    <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">DT(1.7x) HD DA(AR9.3  OD0  CS0  HP0) RX</span>
                     <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
@@ -1666,7 +1696,7 @@ body::after {
                     <span class="score-stars">★ 9.44</span>
                     <span class="score-acc acc-ss">100.00%</span>
                     <span class="score-combo">1,137x</span>
-                    <span class="score-hits"><span class="stat-fc">FC</span></span>
+                    <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">DT(1.2x) HD DA(AR10.3  OD0  CS0  HP0) RX</span>
                     <span class="score-status" style="color:#ff79c6">loved</span>
                 </div>
@@ -1741,7 +1771,7 @@ body::after {
                     <span class="score-stars">★ 8.83</span>
                     <span class="score-acc acc-ss">100.00%</span>
                     <span class="score-combo">2,643x</span>
-                    <span class="score-hits"><span class="stat-fc">FC</span></span>
+                    <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.6  OD0  CS0  HP0) RX</span>
                     <span class="score-status" style="color:#ff79c6">loved</span>
                 </div>
@@ -1966,7 +1996,7 @@ body::after {
                     <span class="score-stars">★ 9.67</span>
                     <span class="score-acc acc-ss">100.00%</span>
                     <span class="score-combo">557x</span>
-                    <span class="score-hits"><span class="stat-fc">FC</span></span>
+                    <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">DT(1.9x) HD DA(AR8.7  OD0  CS0  HP0) RX</span>
                     <span class="score-status" style="color:#ff79c6">loved</span>
                 </div>
@@ -2141,7 +2171,7 @@ body::after {
                     <span class="score-stars">★ 9.69</span>
                     <span class="score-acc acc-ss">100.00%</span>
                     <span class="score-combo">371x</span>
-                    <span class="score-hits"><span class="stat-fc">FC</span></span>
+                    <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.6  OD0  CS0  HP0) RX</span>
                     <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
@@ -2166,7 +2196,7 @@ body::after {
                     <span class="score-stars">★ 8.69</span>
                     <span class="score-acc acc-ss">100.00%</span>
                     <span class="score-combo">3,033x</span>
-                    <span class="score-hits"><span class="stat-fc">FC</span></span>
+                    <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.5  OD0  CS0  HP0) RX</span>
                     <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
@@ -2216,7 +2246,7 @@ body::after {
                     <span class="score-stars">★ 9.13</span>
                     <span class="score-acc acc-ss">100.00%</span>
                     <span class="score-combo">1,697x</span>
-                    <span class="score-hits"><span class="stat-fc">FC</span></span>
+                    <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.4  OD0  CS0  HP0) RX</span>
                     <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
@@ -2266,7 +2296,7 @@ body::after {
                     <span class="score-stars">★ 9.07</span>
                     <span class="score-acc acc-ss">100.00%</span>
                     <span class="score-combo">1,900x</span>
-                    <span class="score-hits"><span class="stat-fc">FC</span></span>
+                    <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.5  OD0  CS0  HP0) RX</span>
                     <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
@@ -2391,7 +2421,7 @@ body::after {
                     <span class="score-stars">★ 9.48</span>
                     <span class="score-acc acc-ss">100.00%</span>
                     <span class="score-combo">759x</span>
-                    <span class="score-hits"><span class="stat-fc">FC</span></span>
+                    <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.5  OD0  CS0  HP0) RX</span>
                     <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
@@ -2541,7 +2571,7 @@ body::after {
                     <span class="score-stars">★ 9.07</span>
                     <span class="score-acc acc-ss">100.00%</span>
                     <span class="score-combo">1,701x</span>
-                    <span class="score-hits"><span class="stat-fc">FC</span></span>
+                    <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.4  OD0  CS0  HP0) RX</span>
                     <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
@@ -2566,7 +2596,7 @@ body::after {
                     <span class="score-stars">★ 9.62</span>
                     <span class="score-acc acc-ss">100.00%</span>
                     <span class="score-combo">344x</span>
-                    <span class="score-hits"><span class="stat-fc">FC</span></span>
+                    <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">DT(1.8x) HD DA(AR9  OD0  CS0  HP0) RX</span>
                     <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
@@ -2641,7 +2671,7 @@ body::after {
                     <span class="score-stars">★ 8.63</span>
                     <span class="score-acc acc-ss">100.00%</span>
                     <span class="score-combo">2,741x</span>
-                    <span class="score-hits"><span class="stat-fc">FC</span></span>
+                    <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.4  OD0  CS0  HP0) RX</span>
                     <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
@@ -2741,7 +2771,7 @@ body::after {
                     <span class="score-stars">★ 8.77</span>
                     <span class="score-acc acc-ss">100.00%</span>
                     <span class="score-combo">2,173x</span>
-                    <span class="score-hits"><span class="stat-fc">FC</span></span>
+                    <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">NC HD DA(AR9.7  OD0  CS0  HP0) RX</span>
                     <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
@@ -2766,7 +2796,7 @@ body::after {
                     <span class="score-stars">★ 9.47</span>
                     <span class="score-acc acc-ss">100.00%</span>
                     <span class="score-combo">517x</span>
-                    <span class="score-hits"><span class="stat-fc">FC</span></span>
+                    <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.8  OD0  CS0  HP0) RX</span>
                     <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
@@ -2941,7 +2971,7 @@ body::after {
                     <span class="score-stars">★ 9.07</span>
                     <span class="score-acc acc-ss">100.00%</span>
                     <span class="score-combo">1,546x</span>
-                    <span class="score-hits"><span class="stat-fc">FC</span></span>
+                    <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.5  OD0  CS0  HP0) RX</span>
                     <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
@@ -3091,7 +3121,7 @@ body::after {
                     <span class="score-stars">★ 9.37</span>
                     <span class="score-acc acc-ss">100.00%</span>
                     <span class="score-combo">721x</span>
-                    <span class="score-hits"><span class="stat-fc">FC</span></span>
+                    <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.6  OD0  CS0  HP0) RX</span>
                     <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
@@ -3191,7 +3221,7 @@ body::after {
                     <span class="score-stars">★ 9.03</span>
                     <span class="score-acc acc-ss">100.00%</span>
                     <span class="score-combo">1,589x</span>
-                    <span class="score-hits"><span class="stat-fc">FC</span></span>
+                    <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.6  OD0  CS0  HP0) RX</span>
                     <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
@@ -3316,7 +3346,7 @@ body::after {
                     <span class="score-stars">★ 8.85</span>
                     <span class="score-acc acc-ss">100.00%</span>
                     <span class="score-combo">1,829x</span>
-                    <span class="score-hits"><span class="stat-fc">FC</span></span>
+                    <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.5  OD0  CS0  HP0) RX</span>
                     <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
@@ -3341,7 +3371,7 @@ body::after {
                     <span class="score-stars">★ 9.40</span>
                     <span class="score-acc acc-ss">100.00%</span>
                     <span class="score-combo">545x</span>
-                    <span class="score-hits"><span class="stat-fc">FC</span></span>
+                    <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.5  OD0  CS0  HP0) RX</span>
                     <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
@@ -3441,7 +3471,7 @@ body::after {
                     <span class="score-stars">★ 9.46</span>
                     <span class="score-acc acc-ss">100.00%</span>
                     <span class="score-combo">392x</span>
-                    <span class="score-hits"><span class="stat-fc">FC</span></span>
+                    <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">DT(1.9x) HD DA(AR8.9  OD0  CS0  HP0) MR RX</span>
                     <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
@@ -3466,7 +3496,7 @@ body::after {
                     <span class="score-stars">★ 8.98</span>
                     <span class="score-acc acc-ss">100.00%</span>
                     <span class="score-combo">1,463x</span>
-                    <span class="score-hits"><span class="stat-fc">FC</span></span>
+                    <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.5  OD0  CS0  HP0) RX</span>
                     <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
@@ -3541,7 +3571,7 @@ body::after {
                     <span class="score-stars">★ 9.32</span>
                     <span class="score-acc acc-ss">100.00%</span>
                     <span class="score-combo">651x</span>
-                    <span class="score-hits"><span class="stat-fc">FC</span></span>
+                    <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.6  OD0  CS0  HP0) RX</span>
                     <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
@@ -3841,7 +3871,7 @@ body::after {
                     <span class="score-stars">★ 9.44</span>
                     <span class="score-acc acc-ss">100.00%</span>
                     <span class="score-combo">257x</span>
-                    <span class="score-hits"><span class="stat-fc">FC</span></span>
+                    <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">DT(1.8x) HD DA(AR9.1  OD0  CS0  HP0) RX</span>
                     <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
@@ -3941,7 +3971,7 @@ body::after {
                     <span class="score-stars">★ 9.02</span>
                     <span class="score-acc acc-ss">100.00%</span>
                     <span class="score-combo">1,412x</span>
-                    <span class="score-hits"><span class="stat-fc">FC</span></span>
+                    <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">DT(1.6x) HD DA(AR9.4  OD0  CS0  HP0) RX</span>
                     <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
@@ -4141,7 +4171,7 @@ body::after {
                     <span class="score-stars">★ 8.48</span>
                     <span class="score-acc acc-ss">100.00%</span>
                     <span class="score-combo">2,494x</span>
-                    <span class="score-hits"><span class="stat-fc">FC</span></span>
+                    <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.5  OD0  CS0  HP0) RX</span>
                     <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
@@ -4291,7 +4321,7 @@ body::after {
                     <span class="score-stars">★ 8.78</span>
                     <span class="score-acc acc-ss">100.00%</span>
                     <span class="score-combo">1,717x</span>
-                    <span class="score-hits"><span class="stat-fc">FC</span></span>
+                    <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.5  OD0  CS0  HP0) RX</span>
                     <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
@@ -4316,7 +4346,7 @@ body::after {
                     <span class="score-stars">★ 9.15</span>
                     <span class="score-acc acc-ss">100.00%</span>
                     <span class="score-combo">745x</span>
-                    <span class="score-hits"><span class="stat-fc">FC</span></span>
+                    <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">DT(1.6x) HD DA(AR9.6  OD0  CS0  HP0) RX</span>
                     <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
@@ -4341,7 +4371,7 @@ body::after {
                     <span class="score-stars">★ 9.26</span>
                     <span class="score-acc acc-ss">100.00%</span>
                     <span class="score-combo">533x</span>
-                    <span class="score-hits"><span class="stat-fc">FC</span></span>
+                    <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.5  OD0  CS0  HP0) RX</span>
                     <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
@@ -4416,7 +4446,7 @@ body::after {
                     <span class="score-stars">★ 8.52</span>
                     <span class="score-acc acc-ss">100.00%</span>
                     <span class="score-combo">2,103x</span>
-                    <span class="score-hits"><span class="stat-fc">FC</span></span>
+                    <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.6  OD0  CS0  HP0) RX</span>
                     <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
@@ -4516,7 +4546,7 @@ body::after {
                     <span class="score-stars">★ 9.00</span>
                     <span class="score-acc acc-ss">100.00%</span>
                     <span class="score-combo">959x</span>
-                    <span class="score-hits"><span class="stat-fc">FC</span></span>
+                    <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.6  OD0  CS0  HP0) RX</span>
                     <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
@@ -4641,7 +4671,7 @@ body::after {
                     <span class="score-stars">★ 8.77</span>
                     <span class="score-acc acc-ss">100.00%</span>
                     <span class="score-combo">1,535x</span>
-                    <span class="score-hits"><span class="stat-fc">FC</span></span>
+                    <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.7  OD0  CS0  HP0) RX</span>
                     <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
@@ -4791,7 +4821,7 @@ body::after {
                     <span class="score-stars">★ 9.15</span>
                     <span class="score-acc acc-ss">100.00%</span>
                     <span class="score-combo">570x</span>
-                    <span class="score-hits"><span class="stat-fc">FC</span></span>
+                    <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.4  OD0  CS0  HP0) RX</span>
                     <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
@@ -4916,7 +4946,7 @@ body::after {
                     <span class="score-stars">★ 9.26</span>
                     <span class="score-acc acc-ss">100.00%</span>
                     <span class="score-combo">261x</span>
-                    <span class="score-hits"><span class="stat-fc">FC</span></span>
+                    <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">DT(1.8x) HD DA(AR9.1  OD0  CS0  HP0) MR RX</span>
                     <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
@@ -4991,7 +5021,7 @@ body::after {
                     <span class="score-stars">★ 8.32</span>
                     <span class="score-acc acc-ss">100.00%</span>
                     <span class="score-combo">2,489x</span>
-                    <span class="score-hits"><span class="stat-fc">FC</span></span>
+                    <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.4  OD0  CS0  HP0) RX</span>
                     <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
@@ -5091,7 +5121,7 @@ body::after {
                     <span class="score-stars">★ 8.74</span>
                     <span class="score-acc acc-ss">100.00%</span>
                     <span class="score-combo">1,575x</span>
-                    <span class="score-hits"><span class="stat-fc">FC</span></span>
+                    <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.7  OD0  CS0  HP0) RX</span>
                     <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
@@ -5141,7 +5171,7 @@ body::after {
                     <span class="score-stars">★ 9.08</span>
                     <span class="score-acc acc-ss">100.00%</span>
                     <span class="score-combo">589x</span>
-                    <span class="score-hits"><span class="stat-fc">FC</span></span>
+                    <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.6  OD0  CS0  HP0) RX</span>
                     <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
@@ -5166,7 +5196,7 @@ body::after {
                     <span class="score-stars">★ 8.99</span>
                     <span class="score-acc acc-ss">100.00%</span>
                     <span class="score-combo">717x</span>
-                    <span class="score-hits"><span class="stat-fc">FC</span></span>
+                    <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.5  OD0  CS0  HP0) RX</span>
                     <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
@@ -5241,7 +5271,7 @@ body::after {
                     <span class="score-stars">★ 9.18</span>
                     <span class="score-acc acc-ss">100.00%</span>
                     <span class="score-combo">472x</span>
-                    <span class="score-hits"><span class="stat-fc">FC</span></span>
+                    <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">DT(1.9x) HD DA(AR8.9  OD0  CS0  HP0) RX</span>
                     <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
@@ -5266,7 +5296,7 @@ body::after {
                     <span class="score-stars">★ 8.91</span>
                     <span class="score-acc acc-ss">100.00%</span>
                     <span class="score-combo">933x</span>
-                    <span class="score-hits"><span class="stat-fc">FC</span></span>
+                    <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.5  OD0  CS0  HP0) RX</span>
                     <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
@@ -5391,7 +5421,7 @@ body::after {
                     <span class="score-stars">★ 9.02</span>
                     <span class="score-acc acc-ss">100.00%</span>
                     <span class="score-combo">662x</span>
-                    <span class="score-hits"><span class="stat-fc">FC</span></span>
+                    <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.5  OD0  CS0  HP0) RX</span>
                     <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
@@ -5405,5 +5435,71 @@ body::after {
     </div>
 
 </div>
+<script>
+(function() {
+    const labels = ["2024-02-23", "2024-03-05", "2024-03-08", "2024-03-12", "2024-03-13", "2024-03-15", "2024-03-17", "2024-03-27", "2024-03-28", "2024-03-29", "2024-04-01", "2024-04-03", "2024-04-07", "2024-04-10", "2024-04-13", "2024-04-15", "2024-04-16", "2024-04-18", "2024-04-19", "2024-04-21", "2024-04-22", "2024-04-23", "2024-04-25", "2024-04-28", "2024-05-03", "2024-05-05", "2024-05-06", "2024-05-09", "2024-05-14", "2024-05-15", "2024-05-27", "2024-06-12", "2024-11-09", "2025-01-28", "2025-07-30", "2025-07-31", "2025-08-01", "2025-08-04", "2025-08-10", "2025-08-20", "2025-08-22", "2025-08-23", "2025-08-26", "2025-08-29", "2025-08-30", "2025-09-01", "2025-09-02", "2025-09-03", "2025-09-04", "2025-09-06", "2025-09-07", "2025-09-08", "2025-09-11", "2025-09-12", "2025-09-13", "2025-09-14", "2025-09-15", "2025-09-16", "2025-09-18", "2025-09-19", "2025-09-20", "2025-09-21", "2025-09-23", "2025-09-25", "2025-09-26", "2025-09-27", "2025-09-30", "2025-10-03", "2025-10-04", "2025-10-10", "2025-10-16", "2025-10-17", "2025-10-18", "2025-10-19", "2025-10-20", "2025-10-21", "2025-10-23", "2025-10-24", "2025-10-26", "2025-10-28", "2025-10-29", "2025-10-30", "2025-11-01", "2025-11-02", "2025-11-07", "2025-11-08", "2026-02-05", "2026-02-06", "2026-02-08", "2026-02-10", "2026-02-11", "2026-02-12", "2026-02-13", "2026-02-15", "2026-02-16", "2026-02-17", "2026-02-18", "2026-02-19", "2026-02-20", "2026-02-21", "2026-02-22", "2026-02-25", "2026-02-26", "2026-02-27", "2026-02-28", "2026-03-01", "2026-03-03", "2026-03-05", "2026-03-06", "2026-03-07", "2026-03-08", "2026-03-10", "2026-03-11", "2026-03-12", "2026-03-14", "2026-03-15", "2026-03-16", "2026-03-17"];
+    const values = [1046.2, 1788.4, 3125.4, 3678.7, 4186.0, 5406.4, 5867.5, 6340.5, 6805.4, 7222.4, 7619.6, 9566.3, 9867.8, 10172.5, 10436.3, 11372.1, 11807.4, 12319.9, 13065.1, 13761.4, 14145.1, 14825.0, 14923.7, 15312.1, 15407.9, 15518.9, 15847.3, 15918.9, 16111.2, 16489.8, 16551.6, 16784.2, 16903.1, 17015.1, 17240.8, 17718.1, 17758.5, 17858.9, 17923.1, 18167.0, 18199.7, 18385.6, 18687.8, 18811.8, 19011.9, 19052.2, 19114.4, 19159.3, 19190.0, 19199.0, 19244.1, 19255.9, 19351.7, 19391.9, 19403.9, 19424.8, 19448.0, 19491.5, 19620.7, 19641.1, 19721.4, 19781.7, 19876.1, 19921.9, 20049.1, 20055.4, 20069.8, 20071.0, 20081.5, 20109.9, 20112.5, 20270.8, 20275.1, 20364.7, 20365.1, 20371.4, 20374.2, 20375.3, 20375.5, 20394.7, 20396.7, 20671.2, 20751.0, 21007.6, 21008.9, 21009.0, 21014.9, 21020.1, 21020.3, 21022.1, 21022.1, 21022.9, 21032.4, 21032.8, 21036.0, 21036.0, 21044.9, 21045.1, 21063.3, 21127.2, 21127.4, 21127.7, 21277.2, 21277.5, 21279.3, 21304.2, 21304.4, 21304.5, 21305.6, 21318.5, 21318.6, 21321.2, 21343.3, 21408.3, 21408.3, 21408.3, 21410.5, 21410.7];
+    if (!labels.length) return;
+    const ctx = document.getElementById('ppChart').getContext('2d');
+    const grad = ctx.createLinearGradient(0, 0, 0, 140);
+    grad.addColorStop(0, 'rgba(255,102,170,0.35)');
+    grad.addColorStop(1, 'rgba(255,102,170,0)');
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels,
+            datasets: [{
+                data: values,
+                borderColor: '#ff66aa',
+                borderWidth: 2,
+                backgroundColor: grad,
+                fill: true,
+                tension: 0.4,
+                pointRadius: 0,
+                pointHoverRadius: 4,
+                pointHoverBackgroundColor: '#ff66aa',
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: { mode: 'index', intersect: false },
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    backgroundColor: 'rgba(15,15,26,0.95)',
+                    borderColor: 'rgba(255,102,170,0.3)',
+                    borderWidth: 1,
+                    titleColor: '#aaa',
+                    bodyColor: '#ffd166',
+                    bodyFont: { family: 'Torus, Space Mono, monospace', weight: 'bold', size: 14 },
+                    callbacks: {
+                        label: ctx => Math.round(ctx.parsed.y).toLocaleString() + 'pp'
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    grid: { color: 'rgba(255,255,255,0.04)' },
+                    ticks: {
+                        color: '#4a4a6a',
+                        font: { size: 10 },
+                        maxTicksLimit: 8,
+                        maxRotation: 0,
+                    }
+                },
+                y: {
+                    grid: { color: 'rgba(255,255,255,0.04)' },
+                    ticks: {
+                        color: '#4a4a6a',
+                        font: { size: 10 },
+                        callback: v => Math.round(v).toLocaleString() + 'pp'
+                    }
+                }
+            }
+        }
+    });
+})();
+</script>
 </body>
 </html>
