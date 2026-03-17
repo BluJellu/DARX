@@ -227,34 +227,30 @@ body::after {
     );
 }
 
-/* rank number */
+/* rank number — sits between art strip and content */
 .score-rank {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 220px;
-    height: 100%;
+    flex-shrink: 0;
+    width: 52px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-family: 'Syne', sans-serif;
-    font-size: 38px;
+    font-size: 22px;
     font-weight: 800;
-    color: rgba(255,255,255,0.18);
+    color: rgba(255,255,255,0.25);
     letter-spacing: -0.03em;
-    pointer-events: none;
     user-select: none;
+    margin-left: 220px;
 }
 
-.score-rank.rank-gold   { color: rgba(255,209,102,0.45); text-shadow: 0 0 40px rgba(255,209,102,0.3); }
-.score-rank.rank-silver { color: rgba(200,200,220,0.4);  text-shadow: 0 0 30px rgba(200,200,220,0.2); }
-.score-rank.rank-bronze { color: rgba(205,140,100,0.4);  text-shadow: 0 0 30px rgba(205,140,100,0.2); }
+.score-rank.rank-gold   { color: rgba(255,209,102,0.75); text-shadow: 0 0 20px rgba(255,209,102,0.3); }
+.score-rank.rank-silver { color: rgba(200,200,220,0.65); text-shadow: 0 0 16px rgba(200,200,220,0.2); }
+.score-rank.rank-bronze { color: rgba(205,140,100,0.65); text-shadow: 0 0 16px rgba(205,140,100,0.2); }
 
 /* card content */
 .score-body {
-    margin-left: 220px;
     flex: 1;
-    padding: 14px 18px;
+    padding: 14px 18px 14px 0;
     display: flex;
     flex-direction: column;
     gap: 8px;
@@ -404,8 +400,8 @@ body::after {
 
 /* ── Responsive ── */
 @media (max-width: 600px) {
-    .score-bg, .score-bg-overlay, .score-rank { width: 110px; }
-    .score-body { margin-left: 110px; }
+    .score-bg, .score-bg-overlay { width: 110px; }
+    .score-rank { margin-left: 110px; width: 40px; font-size: 16px; }
     .score-mods { display: none; }
     .header-stats { gap: 20px; flex-wrap: wrap; }
     .header-divider { display: none; }
