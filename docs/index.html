@@ -9,25 +9,25 @@
 <style>
 @font-face {
     font-family: 'Torus';
-    src: url('https://osu.ppy.sh/fonts/Torus-Regular.woff2') format('woff2');
+    src: url('fonts/Torus-Regular.woff2') format('woff2');
     font-weight: 400;
     font-display: swap;
 }
 @font-face {
     font-family: 'Torus';
-    src: url('https://osu.ppy.sh/fonts/Torus-SemiBold.woff2') format('woff2');
+    src: url('fonts/Torus-SemiBold.woff2') format('woff2');
     font-weight: 600;
     font-display: swap;
 }
 @font-face {
     font-family: 'Torus';
-    src: url('https://osu.ppy.sh/fonts/Torus-Bold.woff2') format('woff2');
+    src: url('fonts/Torus-Bold.woff2') format('woff2');
     font-weight: 700;
     font-display: swap;
 }
 @font-face {
     font-family: 'Torus';
-    src: url('https://osu.ppy.sh/fonts/Torus-Heavy.woff2') format('woff2');
+    src: url('fonts/Torus-Heavy.woff2') format('woff2');
     font-weight: 900;
     font-display: swap;
 }
@@ -37,17 +37,17 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-    --bg:        #08080f;
-    --surface:   #0f0f1a;
-    --border:    rgba(255,255,255,0.07);
+    --bg:        #111113;
+    --surface:   #1c1c1f;
+    --border:    rgba(255,255,255,0.08);
     --pink:      #ff66aa;
     --pink-dim:  rgba(255,102,170,0.15);
     --yellow:    #ffd166;
     --cyan:      #67e8f9;
     --green:     #78e08f;
-    --grey:      #4a4a6a;
-    --text:      #e0e0f0;
-    --text-dim:  #6b6b8f;
+    --grey:      #3a3a3f;
+    --text:      #e8e8ec;
+    --text-dim:  #707078;
 }
 
 html { scroll-behavior: smooth; }
@@ -142,7 +142,7 @@ body::after {
     font-family: 'Torus', 'JetBrains Mono', monospace;
     font-size: 36px;
     font-weight: 900;
-    color: var(--yellow);
+    color: var(--pink);
     letter-spacing: -0.02em;
 }
 
@@ -240,11 +240,11 @@ body::after {
     width: 64px;
     text-align: right;
     padding-right: 14px;
-    font-family: 'Syne', sans-serif;
-    font-size: 20px;
-    font-weight: 800;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 18px;
+    font-weight: 700;
     color: rgba(255,255,255,0.2);
-    letter-spacing: -0.03em;
+    letter-spacing: -0.02em;
     user-select: none;
 }
 
@@ -304,7 +304,7 @@ body::after {
     font-family: 'Torus', 'JetBrains Mono', monospace;
     font-size: 28px;
     font-weight: 900;
-    color: var(--yellow);
+    color: var(--pink);
     line-height: 1;
     letter-spacing: -0.02em;
 }
@@ -343,7 +343,7 @@ body::after {
 .score-stars  { color: #ffd166; }
 .score-combo  { color: var(--text-dim); }
 .score-mods   { color: var(--cyan); font-size: 10px; max-width: 220px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.score-status { font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; }
+/* score-status removed — now using icon column */
 
 .score-acc        { font-weight: 700; }
 .acc-ss           { color: #ffeaa7; text-shadow: 0 0 12px rgba(255,234,167,0.4); }
@@ -379,6 +379,22 @@ body::after {
     text-transform: uppercase;
     color: var(--text-dim);
     margin-bottom: 10px;
+}
+
+/* ── Status icon column ── */
+.status-icon {
+    flex-shrink: 0;
+    width: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.85;
+    transition: opacity 0.15s;
+}
+.status-icon:hover { opacity: 1; }
+.status-icon-empty {
+    flex-shrink: 0;
+    width: 32px;
 }
 
 /* ── Footer ── */
@@ -453,7 +469,7 @@ body::after {
                         <div class="score-diff">i am a blessing to the world.</div>
                     </div>
                     <div class="score-pp-group">
-                        <div class="score-pp">1319<span class="pp-unit">pp</span></div>
+                        <div class="score-pp">1,319<span class="pp-unit">pp</span></div>
                         
                     </div>
                 </div>
@@ -463,10 +479,10 @@ body::after {
                     <span class="score-combo">2,013x</span>
                     <span class="score-hits"><span class="stat-miss">6✗</span> <span class="stat-100">1×100</span></span>
                     <span class="score-mods">DT(1.7x) HD DA(AR9.1  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:0.04s">
             <div class="score-rank rank-silver">2</div>
@@ -480,7 +496,7 @@ body::after {
                         <div class="score-diff">Yakuman</div>
                     </div>
                     <div class="score-pp-group">
-                        <div class="score-pp">1174<span class="pp-unit">pp</span></div>
+                        <div class="score-pp">1,174<span class="pp-unit">pp</span></div>
                         
                     </div>
                 </div>
@@ -490,10 +506,10 @@ body::after {
                     <span class="score-combo">820x</span>
                     <span class="score-hits"><span class="stat-miss">5✗</span> <span class="stat-100">1×100</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.5  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:0.08s">
             <div class="score-rank rank-bronze">3</div>
@@ -507,7 +523,7 @@ body::after {
                         <div class="score-diff">A Brilliant Petal Frozen in an Everlasting Moment</div>
                     </div>
                     <div class="score-pp-group">
-                        <div class="score-pp">1146<span class="pp-unit">pp</span></div>
+                        <div class="score-pp">1,146<span class="pp-unit">pp</span></div>
                         
                     </div>
                 </div>
@@ -517,10 +533,10 @@ body::after {
                     <span class="score-combo">1,731x</span>
                     <span class="score-hits"><span class="stat-100">1×100</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.6  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:0.12s">
             <div class="score-rank ">4</div>
@@ -534,7 +550,7 @@ body::after {
                         <div class="score-diff">ENDLESS DiMENSiONS</div>
                     </div>
                     <div class="score-pp-group">
-                        <div class="score-pp">1126<span class="pp-unit">pp</span></div>
+                        <div class="score-pp">1,126<span class="pp-unit">pp</span></div>
                         
                     </div>
                 </div>
@@ -544,10 +560,10 @@ body::after {
                     <span class="score-combo">1,214x</span>
                     <span class="score-hits"><span class="stat-miss">1✗</span> <span class="stat-100">2×100</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.6  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:0.16s">
             <div class="score-rank ">5</div>
@@ -561,7 +577,7 @@ body::after {
                         <div class="score-diff">The Hero's Back In Town</div>
                     </div>
                     <div class="score-pp-group">
-                        <div class="score-pp">1092<span class="pp-unit">pp</span></div>
+                        <div class="score-pp">1,092<span class="pp-unit">pp</span></div>
                         
                     </div>
                 </div>
@@ -571,10 +587,10 @@ body::after {
                     <span class="score-combo">1,141x</span>
                     <span class="score-hits"><span class="stat-miss">1✗</span> <span class="stat-100">3×100</span></span>
                     <span class="score-mods">DT(1.8x) HD DA(AR9  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#ff79c6">loved</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="loved" style="color:#ff79c6"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 12.5C7 12.5 1 8.5 1 4.5C1 2.567 2.567 1 4.5 1C5.6 1 6.6 1.55 7 2.3C7.4 1.55 8.4 1 9.5 1C11.433 1 13 2.567 13 4.5C13 8.5 7 12.5 7 12.5Z" stroke="#ff79c6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:0.20s">
             <div class="score-rank ">6</div>
@@ -588,7 +604,7 @@ body::after {
                         <div class="score-diff">plambob</div>
                     </div>
                     <div class="score-pp-group">
-                        <div class="score-pp">1087<span class="pp-unit">pp</span></div>
+                        <div class="score-pp">1,087<span class="pp-unit">pp</span></div>
                         
                     </div>
                 </div>
@@ -598,10 +614,10 @@ body::after {
                     <span class="score-combo">624x</span>
                     <span class="score-hits"><span class="stat-miss">4✗</span> <span class="stat-100">1×100</span></span>
                     <span class="score-mods">DT(1.6x) HD DA(AR9.6  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#ff79c6">loved</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="loved" style="color:#ff79c6"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 12.5C7 12.5 1 8.5 1 4.5C1 2.567 2.567 1 4.5 1C5.6 1 6.6 1.55 7 2.3C7.4 1.55 8.4 1 9.5 1C11.433 1 13 2.567 13 4.5C13 8.5 7 12.5 7 12.5Z" stroke="#ff79c6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:0.24s">
             <div class="score-rank ">7</div>
@@ -615,7 +631,7 @@ body::after {
                         <div class="score-diff">LAMAMADELAMAMADELAMAMADELAMAMADELAMAMADE</div>
                     </div>
                     <div class="score-pp-group">
-                        <div class="score-pp">1084<span class="pp-unit">pp</span></div>
+                        <div class="score-pp">1,084<span class="pp-unit">pp</span></div>
                         
                     </div>
                 </div>
@@ -625,10 +641,10 @@ body::after {
                     <span class="score-combo">642x</span>
                     <span class="score-hits"><span class="stat-miss">1✗</span> <span class="stat-100">3×100</span></span>
                     <span class="score-mods">NC HD DA(AR9.7  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#ff79c6">loved</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="loved" style="color:#ff79c6"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 12.5C7 12.5 1 8.5 1 4.5C1 2.567 2.567 1 4.5 1C5.6 1 6.6 1.55 7 2.3C7.4 1.55 8.4 1 9.5 1C11.433 1 13 2.567 13 4.5C13 8.5 7 12.5 7 12.5Z" stroke="#ff79c6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:0.28s">
             <div class="score-rank ">8</div>
@@ -642,7 +658,7 @@ body::after {
                         <div class="score-diff">Mayday</div>
                     </div>
                     <div class="score-pp-group">
-                        <div class="score-pp">1082<span class="pp-unit">pp</span></div>
+                        <div class="score-pp">1,082<span class="pp-unit">pp</span></div>
                         
                     </div>
                 </div>
@@ -652,10 +668,10 @@ body::after {
                     <span class="score-combo">1,023x</span>
                     <span class="score-hits"><span class="stat-miss">1✗</span> <span class="stat-100">2×100</span></span>
                     <span class="score-mods">DT(1.8x) HD DA(AR9  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:0.32s">
             <div class="score-rank ">9</div>
@@ -669,7 +685,7 @@ body::after {
                         <div class="score-diff">SkyFlame's Unity</div>
                     </div>
                     <div class="score-pp-group">
-                        <div class="score-pp">1074<span class="pp-unit">pp</span></div>
+                        <div class="score-pp">1,074<span class="pp-unit">pp</span></div>
                         
                     </div>
                 </div>
@@ -679,10 +695,10 @@ body::after {
                     <span class="score-combo">926x</span>
                     <span class="score-hits"><span class="stat-miss">3✗</span> <span class="stat-100">2×100</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.5  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:0.36s">
             <div class="score-rank ">10</div>
@@ -696,7 +712,7 @@ body::after {
                         <div class="score-diff">Visage Effigy</div>
                     </div>
                     <div class="score-pp-group">
-                        <div class="score-pp">1073<span class="pp-unit">pp</span></div>
+                        <div class="score-pp">1,073<span class="pp-unit">pp</span></div>
                         
                     </div>
                 </div>
@@ -706,10 +722,10 @@ body::after {
                     <span class="score-combo">2,163x</span>
                     <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.5  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:0.40s">
             <div class="score-rank ">11</div>
@@ -723,7 +739,7 @@ body::after {
                         <div class="score-diff">Celestial Judgment</div>
                     </div>
                     <div class="score-pp-group">
-                        <div class="score-pp">1072<span class="pp-unit">pp</span></div>
+                        <div class="score-pp">1,072<span class="pp-unit">pp</span></div>
                         
                     </div>
                 </div>
@@ -733,10 +749,10 @@ body::after {
                     <span class="score-combo">2,137x</span>
                     <span class="score-hits"><span class="stat-miss">1✗</span> <span class="stat-100">1×100</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.5  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:0.44s">
             <div class="score-rank ">12</div>
@@ -750,7 +766,7 @@ body::after {
                         <div class="score-diff">Marathon</div>
                     </div>
                     <div class="score-pp-group">
-                        <div class="score-pp">1069<span class="pp-unit">pp</span></div>
+                        <div class="score-pp">1,069<span class="pp-unit">pp</span></div>
                         
                     </div>
                 </div>
@@ -760,10 +776,10 @@ body::after {
                     <span class="score-combo">3,919x</span>
                     <span class="score-hits"><span class="stat-miss">4✗</span> <span class="stat-100">3×100</span></span>
                     <span class="score-mods">DT(1.8x) HD DA(AR9  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:0.48s">
             <div class="score-rank ">13</div>
@@ -777,7 +793,7 @@ body::after {
                         <div class="score-diff">Marathon</div>
                     </div>
                     <div class="score-pp-group">
-                        <div class="score-pp">1068<span class="pp-unit">pp</span></div>
+                        <div class="score-pp">1,068<span class="pp-unit">pp</span></div>
                         
                     </div>
                 </div>
@@ -787,10 +803,10 @@ body::after {
                     <span class="score-combo">4,197x</span>
                     <span class="score-hits"><span class="stat-100">3×100</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.6  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:0.52s">
             <div class="score-rank ">14</div>
@@ -804,7 +820,7 @@ body::after {
                         <div class="score-diff">FOUR DIMENSIONS</div>
                     </div>
                     <div class="score-pp-group">
-                        <div class="score-pp">1061<span class="pp-unit">pp</span></div>
+                        <div class="score-pp">1,061<span class="pp-unit">pp</span></div>
                         
                     </div>
                 </div>
@@ -814,10 +830,10 @@ body::after {
                     <span class="score-combo">2,402x</span>
                     <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.4  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:0.56s">
             <div class="score-rank ">15</div>
@@ -831,7 +847,7 @@ body::after {
                         <div class="score-diff">CRN's Drive :3</div>
                     </div>
                     <div class="score-pp-group">
-                        <div class="score-pp">1053<span class="pp-unit">pp</span></div>
+                        <div class="score-pp">1,053<span class="pp-unit">pp</span></div>
                         
                     </div>
                 </div>
@@ -841,10 +857,10 @@ body::after {
                     <span class="score-combo">1,139x</span>
                     <span class="score-hits"><span class="stat-miss">1✗</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.6  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#ff79c6">loved</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="loved" style="color:#ff79c6"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 12.5C7 12.5 1 8.5 1 4.5C1 2.567 2.567 1 4.5 1C5.6 1 6.6 1.55 7 2.3C7.4 1.55 8.4 1 9.5 1C11.433 1 13 2.567 13 4.5C13 8.5 7 12.5 7 12.5Z" stroke="#ff79c6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:0.60s">
             <div class="score-rank ">16</div>
@@ -858,7 +874,7 @@ body::after {
                         <div class="score-diff">Lock On</div>
                     </div>
                     <div class="score-pp-group">
-                        <div class="score-pp">1048<span class="pp-unit">pp</span></div>
+                        <div class="score-pp">1,048<span class="pp-unit">pp</span></div>
                         
                     </div>
                 </div>
@@ -868,10 +884,10 @@ body::after {
                     <span class="score-combo">1,381x</span>
                     <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.6  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:0.64s">
             <div class="score-rank ">17</div>
@@ -885,7 +901,7 @@ body::after {
                         <div class="score-diff">Disintegration</div>
                     </div>
                     <div class="score-pp-group">
-                        <div class="score-pp">1037<span class="pp-unit">pp</span></div>
+                        <div class="score-pp">1,037<span class="pp-unit">pp</span></div>
                         
                     </div>
                 </div>
@@ -895,10 +911,10 @@ body::after {
                     <span class="score-combo">1,852x</span>
                     <span class="score-hits"><span class="stat-miss">1✗</span> <span class="stat-100">1×100</span></span>
                     <span class="score-mods">DT(1.9x) HD DA(AR8.8  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:0.68s">
             <div class="score-rank ">18</div>
@@ -912,7 +928,7 @@ body::after {
                         <div class="score-diff">Calamity</div>
                     </div>
                     <div class="score-pp-group">
-                        <div class="score-pp">1030<span class="pp-unit">pp</span></div>
+                        <div class="score-pp">1,030<span class="pp-unit">pp</span></div>
                         
                     </div>
                 </div>
@@ -922,10 +938,10 @@ body::after {
                     <span class="score-combo">1,820x</span>
                     <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.5  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:0.72s">
             <div class="score-rank ">19</div>
@@ -939,7 +955,7 @@ body::after {
                         <div class="score-diff">Arles</div>
                     </div>
                     <div class="score-pp-group">
-                        <div class="score-pp">1016<span class="pp-unit">pp</span></div>
+                        <div class="score-pp">1,016<span class="pp-unit">pp</span></div>
                         
                     </div>
                 </div>
@@ -949,10 +965,10 @@ body::after {
                     <span class="score-combo">1,453x</span>
                     <span class="score-hits"><span class="stat-miss">1✗</span> <span class="stat-100">1×100</span></span>
                     <span class="score-mods">DT(1.7x) HD DA(AR9.2  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#ff79c6">loved</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="loved" style="color:#ff79c6"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 12.5C7 12.5 1 8.5 1 4.5C1 2.567 2.567 1 4.5 1C5.6 1 6.6 1.55 7 2.3C7.4 1.55 8.4 1 9.5 1C11.433 1 13 2.567 13 4.5C13 8.5 7 12.5 7 12.5Z" stroke="#ff79c6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:0.76s">
             <div class="score-rank ">20</div>
@@ -966,7 +982,7 @@ body::after {
                         <div class="score-diff">restful sleep</div>
                     </div>
                     <div class="score-pp-group">
-                        <div class="score-pp">1013<span class="pp-unit">pp</span></div>
+                        <div class="score-pp">1,013<span class="pp-unit">pp</span></div>
                         
                     </div>
                 </div>
@@ -976,10 +992,10 @@ body::after {
                     <span class="score-combo">1,028x</span>
                     <span class="score-hits"><span class="stat-miss">4✗</span> <span class="stat-100">1×100</span></span>
                     <span class="score-mods">DT HD DA(AR9.7  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#ff79c6">loved</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="loved" style="color:#ff79c6"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 12.5C7 12.5 1 8.5 1 4.5C1 2.567 2.567 1 4.5 1C5.6 1 6.6 1.55 7 2.3C7.4 1.55 8.4 1 9.5 1C11.433 1 13 2.567 13 4.5C13 8.5 7 12.5 7 12.5Z" stroke="#ff79c6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:0.80s">
             <div class="score-rank ">21</div>
@@ -993,7 +1009,7 @@ body::after {
                         <div class="score-diff">Defiled Love</div>
                     </div>
                     <div class="score-pp-group">
-                        <div class="score-pp">1013<span class="pp-unit">pp</span></div>
+                        <div class="score-pp">1,013<span class="pp-unit">pp</span></div>
                         
                     </div>
                 </div>
@@ -1003,10 +1019,10 @@ body::after {
                     <span class="score-combo">1,082x</span>
                     <span class="score-hits"><span class="stat-miss">4✗</span> <span class="stat-100">4×100</span></span>
                     <span class="score-mods">DT(1.8x) HD DA(AR9  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:0.84s">
             <div class="score-rank ">22</div>
@@ -1020,7 +1036,7 @@ body::after {
                         <div class="score-diff">Absolute Privilege!</div>
                     </div>
                     <div class="score-pp-group">
-                        <div class="score-pp">1008<span class="pp-unit">pp</span></div>
+                        <div class="score-pp">1,008<span class="pp-unit">pp</span></div>
                         
                     </div>
                 </div>
@@ -1030,10 +1046,10 @@ body::after {
                     <span class="score-combo">523x</span>
                     <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.5  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:0.88s">
             <div class="score-rank ">23</div>
@@ -1047,7 +1063,7 @@ body::after {
                         <div class="score-diff">A THOUSAND SWORDS</div>
                     </div>
                     <div class="score-pp-group">
-                        <div class="score-pp">1007<span class="pp-unit">pp</span></div>
+                        <div class="score-pp">1,007<span class="pp-unit">pp</span></div>
                         
                     </div>
                 </div>
@@ -1057,10 +1073,10 @@ body::after {
                     <span class="score-combo">3,233x</span>
                     <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.5  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:0.92s">
             <div class="score-rank ">24</div>
@@ -1074,7 +1090,7 @@ body::after {
                         <div class="score-diff">~Farewell~</div>
                     </div>
                     <div class="score-pp-group">
-                        <div class="score-pp">1004<span class="pp-unit">pp</span></div>
+                        <div class="score-pp">1,004<span class="pp-unit">pp</span></div>
                         
                     </div>
                 </div>
@@ -1084,10 +1100,10 @@ body::after {
                     <span class="score-combo">1,277x</span>
                     <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">HD DT RX DA(AR9.7  OD0  CS0  HP0)</span>
-                    <span class="score-status" style="color:#ff79c6">loved</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="loved" style="color:#ff79c6"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 12.5C7 12.5 1 8.5 1 4.5C1 2.567 2.567 1 4.5 1C5.6 1 6.6 1.55 7 2.3C7.4 1.55 8.4 1 9.5 1C11.433 1 13 2.567 13 4.5C13 8.5 7 12.5 7 12.5Z" stroke="#ff79c6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:0.96s">
             <div class="score-rank ">25</div>
@@ -1101,7 +1117,7 @@ body::after {
                         <div class="score-diff">Crimson Shard</div>
                     </div>
                     <div class="score-pp-group">
-                        <div class="score-pp">1001<span class="pp-unit">pp</span></div>
+                        <div class="score-pp">1,001<span class="pp-unit">pp</span></div>
                         
                     </div>
                 </div>
@@ -1111,10 +1127,10 @@ body::after {
                     <span class="score-combo">1,174x</span>
                     <span class="score-hits"><span class="stat-100">1×100</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.8  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#ff79c6">loved</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="loved" style="color:#ff79c6"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 12.5C7 12.5 1 8.5 1 4.5C1 2.567 2.567 1 4.5 1C5.6 1 6.6 1.55 7 2.3C7.4 1.55 8.4 1 9.5 1C11.433 1 13 2.567 13 4.5C13 8.5 7 12.5 7 12.5Z" stroke="#ff79c6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:1.00s">
             <div class="score-rank ">26</div>
@@ -1138,10 +1154,10 @@ body::after {
                     <span class="score-combo">1,102x</span>
                     <span class="score-hits"><span class="stat-miss">5✗</span> <span class="stat-100">5×100</span></span>
                     <span class="score-mods">DT HD DA(AR9.7  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#ff79c6">loved</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="loved" style="color:#ff79c6"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 12.5C7 12.5 1 8.5 1 4.5C1 2.567 2.567 1 4.5 1C5.6 1 6.6 1.55 7 2.3C7.4 1.55 8.4 1 9.5 1C11.433 1 13 2.567 13 4.5C13 8.5 7 12.5 7 12.5Z" stroke="#ff79c6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:1.04s">
             <div class="score-rank ">27</div>
@@ -1165,10 +1181,10 @@ body::after {
                     <span class="score-combo">333x</span>
                     <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.5  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:1.08s">
             <div class="score-rank ">28</div>
@@ -1192,10 +1208,10 @@ body::after {
                     <span class="score-combo">284x</span>
                     <span class="score-hits"><span class="stat-miss">1✗</span> <span class="stat-100">2×100</span></span>
                     <span class="score-mods">DT(1.8x) HD DA(AR9  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:1.12s">
             <div class="score-rank ">29</div>
@@ -1219,10 +1235,10 @@ body::after {
                     <span class="score-combo">1,366x</span>
                     <span class="score-hits"><span class="stat-fc">FC</span></span>
                     <span class="score-mods">DT(1.8x) HD DA(AR9  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:1.16s">
             <div class="score-rank ">30</div>
@@ -1246,10 +1262,10 @@ body::after {
                     <span class="score-combo">1,421x</span>
                     <span class="score-hits"><span class="stat-miss">5✗</span> <span class="stat-100">1×100</span></span>
                     <span class="score-mods">DT(1.9x) HD DA(AR8.7  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:1.20s">
             <div class="score-rank ">31</div>
@@ -1273,10 +1289,10 @@ body::after {
                     <span class="score-combo">968x</span>
                     <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.6  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:1.24s">
             <div class="score-rank ">32</div>
@@ -1300,10 +1316,10 @@ body::after {
                     <span class="score-combo">808x</span>
                     <span class="score-hits"><span class="stat-miss">3✗</span> <span class="stat-100">1×100</span></span>
                     <span class="score-mods">DT(1.8x) HD DA(AR9  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:1.28s">
             <div class="score-rank ">33</div>
@@ -1327,10 +1343,10 @@ body::after {
                     <span class="score-combo">483x</span>
                     <span class="score-hits"><span class="stat-miss">1✗</span></span>
                     <span class="score-mods">DT(1.7x) HD DA(AR9.2  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#ff79c6">loved</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="loved" style="color:#ff79c6"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 12.5C7 12.5 1 8.5 1 4.5C1 2.567 2.567 1 4.5 1C5.6 1 6.6 1.55 7 2.3C7.4 1.55 8.4 1 9.5 1C11.433 1 13 2.567 13 4.5C13 8.5 7 12.5 7 12.5Z" stroke="#ff79c6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:1.32s">
             <div class="score-rank ">34</div>
@@ -1354,10 +1370,10 @@ body::after {
                     <span class="score-combo">349x</span>
                     <span class="score-hits"><span class="stat-miss">6✗</span> <span class="stat-100">1×100</span></span>
                     <span class="score-mods">DT HD DA(AR9.8  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:1.36s">
             <div class="score-rank ">35</div>
@@ -1381,10 +1397,10 @@ body::after {
                     <span class="score-combo">763x</span>
                     <span class="score-hits"><span class="stat-miss">7✗</span> <span class="stat-100">1×100</span></span>
                     <span class="score-mods">DT HD DA(AR9.7  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#ff79c6">loved</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="loved" style="color:#ff79c6"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 12.5C7 12.5 1 8.5 1 4.5C1 2.567 2.567 1 4.5 1C5.6 1 6.6 1.55 7 2.3C7.4 1.55 8.4 1 9.5 1C11.433 1 13 2.567 13 4.5C13 8.5 7 12.5 7 12.5Z" stroke="#ff79c6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:1.40s">
             <div class="score-rank ">36</div>
@@ -1408,10 +1424,10 @@ body::after {
                     <span class="score-combo">1,138x</span>
                     <span class="score-hits"><span class="stat-miss">1✗</span> <span class="stat-100">2×100</span></span>
                     <span class="score-mods">DT(1.9x) HD DA(AR8.8  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:1.44s">
             <div class="score-rank ">37</div>
@@ -1435,10 +1451,10 @@ body::after {
                     <span class="score-combo">737x</span>
                     <span class="score-hits"><span class="stat-miss">2✗</span></span>
                     <span class="score-mods">DT(1.1x) HD DA(AR10.6  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#ff79c6">loved</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="loved" style="color:#ff79c6"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 12.5C7 12.5 1 8.5 1 4.5C1 2.567 2.567 1 4.5 1C5.6 1 6.6 1.55 7 2.3C7.4 1.55 8.4 1 9.5 1C11.433 1 13 2.567 13 4.5C13 8.5 7 12.5 7 12.5Z" stroke="#ff79c6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:1.48s">
             <div class="score-rank ">38</div>
@@ -1462,10 +1478,10 @@ body::after {
                     <span class="score-combo">1,531x</span>
                     <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">NC HD DA(AR9.6  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#ff79c6">loved</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="loved" style="color:#ff79c6"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 12.5C7 12.5 1 8.5 1 4.5C1 2.567 2.567 1 4.5 1C5.6 1 6.6 1.55 7 2.3C7.4 1.55 8.4 1 9.5 1C11.433 1 13 2.567 13 4.5C13 8.5 7 12.5 7 12.5Z" stroke="#ff79c6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:1.52s">
             <div class="score-rank ">39</div>
@@ -1489,10 +1505,10 @@ body::after {
                     <span class="score-combo">659x</span>
                     <span class="score-hits"><span class="stat-100">2×100</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.6  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:1.56s">
             <div class="score-rank ">40</div>
@@ -1516,10 +1532,10 @@ body::after {
                     <span class="score-combo">1,293x</span>
                     <span class="score-hits"><span class="stat-miss">3✗</span></span>
                     <span class="score-mods">HD DT(1.9x) RX DA(AR8.8  OD0  CS0  HP0)</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:1.60s">
             <div class="score-rank ">41</div>
@@ -1543,10 +1559,10 @@ body::after {
                     <span class="score-combo">1,236x</span>
                     <span class="score-hits"><span class="stat-100">2×100</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.5  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:1.64s">
             <div class="score-rank ">42</div>
@@ -1570,10 +1586,10 @@ body::after {
                     <span class="score-combo">949x</span>
                     <span class="score-hits"><span class="stat-miss">2✗</span></span>
                     <span class="score-mods">DT HD DA(AR9.6  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:1.68s">
             <div class="score-rank ">43</div>
@@ -1597,10 +1613,10 @@ body::after {
                     <span class="score-combo">724x</span>
                     <span class="score-hits"><span class="stat-miss">10✗</span></span>
                     <span class="score-mods">DT HD DA(AR9.7  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#ff79c6">loved</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="loved" style="color:#ff79c6"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 12.5C7 12.5 1 8.5 1 4.5C1 2.567 2.567 1 4.5 1C5.6 1 6.6 1.55 7 2.3C7.4 1.55 8.4 1 9.5 1C11.433 1 13 2.567 13 4.5C13 8.5 7 12.5 7 12.5Z" stroke="#ff79c6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:1.72s">
             <div class="score-rank ">44</div>
@@ -1624,10 +1640,10 @@ body::after {
                     <span class="score-combo">412x</span>
                     <span class="score-hits"><span class="stat-miss">4✗</span> <span class="stat-100">2×100</span></span>
                     <span class="score-mods">DT HD DA(AR9.9  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:1.76s">
             <div class="score-rank ">45</div>
@@ -1651,10 +1667,10 @@ body::after {
                     <span class="score-combo">1,019x</span>
                     <span class="score-hits"><span class="stat-miss">1✗</span></span>
                     <span class="score-mods">DT HD DA(AR9.6  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:1.80s">
             <div class="score-rank ">46</div>
@@ -1678,10 +1694,10 @@ body::after {
                     <span class="score-combo">556x</span>
                     <span class="score-hits"><span class="stat-100">2×100</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.5  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:1.84s">
             <div class="score-rank ">47</div>
@@ -1705,10 +1721,10 @@ body::after {
                     <span class="score-combo">913x</span>
                     <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">DT(1.7x) HD DA(AR9.3  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:1.88s">
             <div class="score-rank ">48</div>
@@ -1732,10 +1748,10 @@ body::after {
                     <span class="score-combo">5,285x</span>
                     <span class="score-hits"><span class="stat-miss">1✗</span> <span class="stat-100">7×100</span></span>
                     <span class="score-mods">DT(1.7x) HD DA(AR9.1  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:1.92s">
             <div class="score-rank ">49</div>
@@ -1759,10 +1775,10 @@ body::after {
                     <span class="score-combo">926x</span>
                     <span class="score-hits"><span class="stat-miss">3✗</span> <span class="stat-100">8×100</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.6  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:1.96s">
             <div class="score-rank ">50</div>
@@ -1786,10 +1802,10 @@ body::after {
                     <span class="score-combo">3,986x</span>
                     <span class="score-hits"><span class="stat-100">2×100</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.6  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:2.00s">
             <div class="score-rank ">51</div>
@@ -1813,10 +1829,10 @@ body::after {
                     <span class="score-combo">1,137x</span>
                     <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">DT(1.2x) HD DA(AR10.3  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#ff79c6">loved</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="loved" style="color:#ff79c6"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 12.5C7 12.5 1 8.5 1 4.5C1 2.567 2.567 1 4.5 1C5.6 1 6.6 1.55 7 2.3C7.4 1.55 8.4 1 9.5 1C11.433 1 13 2.567 13 4.5C13 8.5 7 12.5 7 12.5Z" stroke="#ff79c6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:2.04s">
             <div class="score-rank ">52</div>
@@ -1840,10 +1856,10 @@ body::after {
                     <span class="score-combo">603x</span>
                     <span class="score-hits"><span class="stat-100">1×100</span></span>
                     <span class="score-mods">DT(1.7x) HD DA(AR9.3  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#ff79c6">loved</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="loved" style="color:#ff79c6"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 12.5C7 12.5 1 8.5 1 4.5C1 2.567 2.567 1 4.5 1C5.6 1 6.6 1.55 7 2.3C7.4 1.55 8.4 1 9.5 1C11.433 1 13 2.567 13 4.5C13 8.5 7 12.5 7 12.5Z" stroke="#ff79c6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:2.08s">
             <div class="score-rank ">53</div>
@@ -1867,10 +1883,10 @@ body::after {
                     <span class="score-combo">1,408x</span>
                     <span class="score-hits"><span class="stat-miss">1✗</span> <span class="stat-100">1×100</span></span>
                     <span class="score-mods">DT(1.8x) HD DA(AR9  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:2.12s">
             <div class="score-rank ">54</div>
@@ -1894,10 +1910,10 @@ body::after {
                     <span class="score-combo">2,643x</span>
                     <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.6  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#ff79c6">loved</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="loved" style="color:#ff79c6"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 12.5C7 12.5 1 8.5 1 4.5C1 2.567 2.567 1 4.5 1C5.6 1 6.6 1.55 7 2.3C7.4 1.55 8.4 1 9.5 1C11.433 1 13 2.567 13 4.5C13 8.5 7 12.5 7 12.5Z" stroke="#ff79c6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:2.16s">
             <div class="score-rank ">55</div>
@@ -1921,10 +1937,10 @@ body::after {
                     <span class="score-combo">1,817x</span>
                     <span class="score-hits"><span class="stat-miss">1✗</span> <span class="stat-100">2×100</span></span>
                     <span class="score-mods">DT(1.7x) HD DA(AR9.2  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#ff79c6">loved</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="loved" style="color:#ff79c6"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 12.5C7 12.5 1 8.5 1 4.5C1 2.567 2.567 1 4.5 1C5.6 1 6.6 1.55 7 2.3C7.4 1.55 8.4 1 9.5 1C11.433 1 13 2.567 13 4.5C13 8.5 7 12.5 7 12.5Z" stroke="#ff79c6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:2.20s">
             <div class="score-rank ">56</div>
@@ -1948,10 +1964,10 @@ body::after {
                     <span class="score-combo">845x</span>
                     <span class="score-hits"><span class="stat-miss">4✗</span> <span class="stat-100">3×100</span> <span class="stat-50">1×50</span></span>
                     <span class="score-mods">DT(1.8x) HD DA(AR8.9  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#ff79c6">loved</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="loved" style="color:#ff79c6"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 12.5C7 12.5 1 8.5 1 4.5C1 2.567 2.567 1 4.5 1C5.6 1 6.6 1.55 7 2.3C7.4 1.55 8.4 1 9.5 1C11.433 1 13 2.567 13 4.5C13 8.5 7 12.5 7 12.5Z" stroke="#ff79c6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:2.24s">
             <div class="score-rank ">57</div>
@@ -1975,10 +1991,10 @@ body::after {
                     <span class="score-combo">1,697x</span>
                     <span class="score-hits"><span class="stat-100">4×100</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.5  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:2.28s">
             <div class="score-rank ">58</div>
@@ -2002,10 +2018,10 @@ body::after {
                     <span class="score-combo">744x</span>
                     <span class="score-hits"><span class="stat-miss">7✗</span> <span class="stat-100">2×100</span></span>
                     <span class="score-mods">DT HD DA(AR9.6  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#ff79c6">loved</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="loved" style="color:#ff79c6"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 12.5C7 12.5 1 8.5 1 4.5C1 2.567 2.567 1 4.5 1C5.6 1 6.6 1.55 7 2.3C7.4 1.55 8.4 1 9.5 1C11.433 1 13 2.567 13 4.5C13 8.5 7 12.5 7 12.5Z" stroke="#ff79c6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:2.32s">
             <div class="score-rank ">59</div>
@@ -2029,10 +2045,10 @@ body::after {
                     <span class="score-combo">2,079x</span>
                     <span class="score-hits"><span class="stat-100">1×100</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.5  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:2.36s">
             <div class="score-rank ">60</div>
@@ -2056,10 +2072,10 @@ body::after {
                     <span class="score-combo">534x</span>
                     <span class="score-hits"><span class="stat-miss">4✗</span> <span class="stat-100">2×100</span></span>
                     <span class="score-mods">DT(1.9x) HD DA(AR8.9  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#ff79c6">loved</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="loved" style="color:#ff79c6"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 12.5C7 12.5 1 8.5 1 4.5C1 2.567 2.567 1 4.5 1C5.6 1 6.6 1.55 7 2.3C7.4 1.55 8.4 1 9.5 1C11.433 1 13 2.567 13 4.5C13 8.5 7 12.5 7 12.5Z" stroke="#ff79c6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:2.40s">
             <div class="score-rank ">61</div>
@@ -2083,10 +2099,10 @@ body::after {
                     <span class="score-combo">672x</span>
                     <span class="score-hits"><span class="stat-fc">FC</span></span>
                     <span class="score-mods">DT(1.8x) HD DA(AR9.1  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#ff79c6">loved</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="loved" style="color:#ff79c6"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 12.5C7 12.5 1 8.5 1 4.5C1 2.567 2.567 1 4.5 1C5.6 1 6.6 1.55 7 2.3C7.4 1.55 8.4 1 9.5 1C11.433 1 13 2.567 13 4.5C13 8.5 7 12.5 7 12.5Z" stroke="#ff79c6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:2.44s">
             <div class="score-rank ">62</div>
@@ -2110,10 +2126,10 @@ body::after {
                     <span class="score-combo">1,698x</span>
                     <span class="score-hits"><span class="stat-miss">5✗</span> <span class="stat-100">1×100</span></span>
                     <span class="score-mods">DT(1.7x) HD DA(AR9.3  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:2.48s">
             <div class="score-rank ">63</div>
@@ -2137,10 +2153,10 @@ body::after {
                     <span class="score-combo">557x</span>
                     <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">DT(1.9x) HD DA(AR8.7  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#ff79c6">loved</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="loved" style="color:#ff79c6"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 12.5C7 12.5 1 8.5 1 4.5C1 2.567 2.567 1 4.5 1C5.6 1 6.6 1.55 7 2.3C7.4 1.55 8.4 1 9.5 1C11.433 1 13 2.567 13 4.5C13 8.5 7 12.5 7 12.5Z" stroke="#ff79c6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:2.52s">
             <div class="score-rank ">64</div>
@@ -2164,10 +2180,10 @@ body::after {
                     <span class="score-combo">617x</span>
                     <span class="score-hits"><span class="stat-miss">5✗</span></span>
                     <span class="score-mods">DT HD DA(AR9.6  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:2.56s">
             <div class="score-rank ">65</div>
@@ -2191,10 +2207,10 @@ body::after {
                     <span class="score-combo">1,176x</span>
                     <span class="score-hits"><span class="stat-miss">1✗</span></span>
                     <span class="score-mods">DT(1.7x) HD DA(AR9.1  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:2.60s">
             <div class="score-rank ">66</div>
@@ -2218,10 +2234,10 @@ body::after {
                     <span class="score-combo">605x</span>
                     <span class="score-hits"><span class="stat-miss">2✗</span></span>
                     <span class="score-mods">DT(1.8x) HD DA(AR9.2  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:2.64s">
             <div class="score-rank ">67</div>
@@ -2245,10 +2261,10 @@ body::after {
                     <span class="score-combo">537x</span>
                     <span class="score-hits"><span class="stat-miss">8✗</span> <span class="stat-100">5×100</span></span>
                     <span class="score-mods">DT(1.8x) HD DA(AR9  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#ff79c6">loved</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="loved" style="color:#ff79c6"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 12.5C7 12.5 1 8.5 1 4.5C1 2.567 2.567 1 4.5 1C5.6 1 6.6 1.55 7 2.3C7.4 1.55 8.4 1 9.5 1C11.433 1 13 2.567 13 4.5C13 8.5 7 12.5 7 12.5Z" stroke="#ff79c6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:2.68s">
             <div class="score-rank ">68</div>
@@ -2272,10 +2288,10 @@ body::after {
                     <span class="score-combo">876x</span>
                     <span class="score-hits"><span class="stat-miss">1✗</span> <span class="stat-100">1×100</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.4  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:2.72s">
             <div class="score-rank ">69</div>
@@ -2299,10 +2315,10 @@ body::after {
                     <span class="score-combo">987x</span>
                     <span class="score-hits"><span class="stat-miss">2✗</span> <span class="stat-100">1×100</span></span>
                     <span class="score-mods">DT(1.7x) HD DA(AR9.2  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:2.76s">
             <div class="score-rank ">70</div>
@@ -2326,10 +2342,10 @@ body::after {
                     <span class="score-combo">371x</span>
                     <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.6  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:2.80s">
             <div class="score-rank ">71</div>
@@ -2353,10 +2369,10 @@ body::after {
                     <span class="score-combo">3,033x</span>
                     <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.5  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:2.84s">
             <div class="score-rank ">72</div>
@@ -2380,10 +2396,10 @@ body::after {
                     <span class="score-combo">1,338x</span>
                     <span class="score-hits"><span class="stat-miss">1✗</span> <span class="stat-100">2×100</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.6  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:2.88s">
             <div class="score-rank ">73</div>
@@ -2407,10 +2423,10 @@ body::after {
                     <span class="score-combo">1,697x</span>
                     <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.4  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:2.92s">
             <div class="score-rank ">74</div>
@@ -2434,10 +2450,10 @@ body::after {
                     <span class="score-combo">2,607x</span>
                     <span class="score-hits"><span class="stat-100">1×100</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.5  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:2.96s">
             <div class="score-rank ">75</div>
@@ -2461,10 +2477,10 @@ body::after {
                     <span class="score-combo">1,900x</span>
                     <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.5  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:3.00s">
             <div class="score-rank ">76</div>
@@ -2488,10 +2504,10 @@ body::after {
                     <span class="score-combo">2,680x</span>
                     <span class="score-hits"><span class="stat-100">2×100</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.6  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:3.04s">
             <div class="score-rank ">77</div>
@@ -2515,10 +2531,10 @@ body::after {
                     <span class="score-combo">2,067x</span>
                     <span class="score-hits"><span class="stat-100">1×100</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.6  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:3.08s">
             <div class="score-rank ">78</div>
@@ -2542,10 +2558,10 @@ body::after {
                     <span class="score-combo">896x</span>
                     <span class="score-hits"><span class="stat-miss">1✗</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.4  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:3.12s">
             <div class="score-rank ">79</div>
@@ -2569,10 +2585,10 @@ body::after {
                     <span class="score-combo">754x</span>
                     <span class="score-hits"><span class="stat-fc">FC</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.5  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:3.16s">
             <div class="score-rank ">80</div>
@@ -2596,10 +2612,10 @@ body::after {
                     <span class="score-combo">759x</span>
                     <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.5  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:3.20s">
             <div class="score-rank ">81</div>
@@ -2623,10 +2639,10 @@ body::after {
                     <span class="score-combo">1,145x</span>
                     <span class="score-hits"><span class="stat-100">1×100</span></span>
                     <span class="score-mods">DT HD DA(AR9.6  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#ff79c6">loved</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="loved" style="color:#ff79c6"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 12.5C7 12.5 1 8.5 1 4.5C1 2.567 2.567 1 4.5 1C5.6 1 6.6 1.55 7 2.3C7.4 1.55 8.4 1 9.5 1C11.433 1 13 2.567 13 4.5C13 8.5 7 12.5 7 12.5Z" stroke="#ff79c6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:3.24s">
             <div class="score-rank ">82</div>
@@ -2650,10 +2666,10 @@ body::after {
                     <span class="score-combo">2,021x</span>
                     <span class="score-hits"><span class="stat-miss">2✗</span> <span class="stat-100">1×100</span></span>
                     <span class="score-mods">DT(1.7x) HD DA(AR9.2  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:3.28s">
             <div class="score-rank ">83</div>
@@ -2677,10 +2693,10 @@ body::after {
                     <span class="score-combo">196x</span>
                     <span class="score-hits"><span class="stat-miss">6✗</span></span>
                     <span class="score-mods">DT(1.4x) HD DA(AR9.9  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:3.32s">
             <div class="score-rank ">84</div>
@@ -2704,10 +2720,10 @@ body::after {
                     <span class="score-combo">2,158x</span>
                     <span class="score-hits"><span class="stat-miss">3✗</span> <span class="stat-100">2×100</span></span>
                     <span class="score-mods">DT(1.6x) HD DA(AR9.6  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:3.36s">
             <div class="score-rank ">85</div>
@@ -2731,10 +2747,10 @@ body::after {
                     <span class="score-combo">320x</span>
                     <span class="score-hits"><span class="stat-miss">10✗</span> <span class="stat-100">5×100</span></span>
                     <span class="score-mods">DT(1.8x) HD DA(AR9  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:3.40s">
             <div class="score-rank ">86</div>
@@ -2758,10 +2774,10 @@ body::after {
                     <span class="score-combo">1,701x</span>
                     <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.4  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:3.44s">
             <div class="score-rank ">87</div>
@@ -2785,10 +2801,10 @@ body::after {
                     <span class="score-combo">344x</span>
                     <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">DT(1.8x) HD DA(AR9  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:3.48s">
             <div class="score-rank ">88</div>
@@ -2812,10 +2828,10 @@ body::after {
                     <span class="score-combo">472x</span>
                     <span class="score-hits"><span class="stat-miss">4✗</span> <span class="stat-100">5×100</span></span>
                     <span class="score-mods">DT(1.8x) HD DA(AR9.1  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#ff79c6">loved</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="loved" style="color:#ff79c6"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 12.5C7 12.5 1 8.5 1 4.5C1 2.567 2.567 1 4.5 1C5.6 1 6.6 1.55 7 2.3C7.4 1.55 8.4 1 9.5 1C11.433 1 13 2.567 13 4.5C13 8.5 7 12.5 7 12.5Z" stroke="#ff79c6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:3.52s">
             <div class="score-rank ">89</div>
@@ -2839,10 +2855,10 @@ body::after {
                     <span class="score-combo">1,647x</span>
                     <span class="score-hits"><span class="stat-miss">1✗</span></span>
                     <span class="score-mods">DT(1.4x) HD DA(AR9.9  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#ff79c6">loved</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="loved" style="color:#ff79c6"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 12.5C7 12.5 1 8.5 1 4.5C1 2.567 2.567 1 4.5 1C5.6 1 6.6 1.55 7 2.3C7.4 1.55 8.4 1 9.5 1C11.433 1 13 2.567 13 4.5C13 8.5 7 12.5 7 12.5Z" stroke="#ff79c6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:3.56s">
             <div class="score-rank ">90</div>
@@ -2866,10 +2882,10 @@ body::after {
                     <span class="score-combo">2,741x</span>
                     <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.4  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:3.60s">
             <div class="score-rank ">91</div>
@@ -2893,10 +2909,10 @@ body::after {
                     <span class="score-combo">538x</span>
                     <span class="score-hits"><span class="stat-miss">16✗</span> <span class="stat-100">3×100</span></span>
                     <span class="score-mods">HD DA(AR9.7  OD0  CS0  HP0) RX DT</span>
-                    <span class="score-status" style="color:#ff79c6">loved</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="loved" style="color:#ff79c6"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 12.5C7 12.5 1 8.5 1 4.5C1 2.567 2.567 1 4.5 1C5.6 1 6.6 1.55 7 2.3C7.4 1.55 8.4 1 9.5 1C11.433 1 13 2.567 13 4.5C13 8.5 7 12.5 7 12.5Z" stroke="#ff79c6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:3.64s">
             <div class="score-rank ">92</div>
@@ -2920,10 +2936,10 @@ body::after {
                     <span class="score-combo">703x</span>
                     <span class="score-hits"><span class="stat-miss">10✗</span> <span class="stat-100">7×100</span></span>
                     <span class="score-mods">DT(1.6x) HD DA(AR9.4  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:3.68s">
             <div class="score-rank ">93</div>
@@ -2947,10 +2963,10 @@ body::after {
                     <span class="score-combo">2,297x</span>
                     <span class="score-hits"><span class="stat-miss">1✗</span> <span class="stat-100">2×100</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.5  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:3.72s">
             <div class="score-rank ">94</div>
@@ -2974,10 +2990,10 @@ body::after {
                     <span class="score-combo">2,173x</span>
                     <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">NC HD DA(AR9.7  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:3.76s">
             <div class="score-rank ">95</div>
@@ -3001,10 +3017,10 @@ body::after {
                     <span class="score-combo">517x</span>
                     <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.8  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:3.80s">
             <div class="score-rank ">96</div>
@@ -3028,10 +3044,10 @@ body::after {
                     <span class="score-combo">551x</span>
                     <span class="score-hits"><span class="stat-miss">5✗</span></span>
                     <span class="score-mods">DT(1.7x) HD DA(AR9.3  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:3.84s">
             <div class="score-rank ">97</div>
@@ -3055,10 +3071,10 @@ body::after {
                     <span class="score-combo">1,451x</span>
                     <span class="score-hits"><span class="stat-100">1×100</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.6  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:3.88s">
             <div class="score-rank ">98</div>
@@ -3082,10 +3098,10 @@ body::after {
                     <span class="score-combo">1,533x</span>
                     <span class="score-hits"><span class="stat-miss">7✗</span> <span class="stat-100">4×100</span></span>
                     <span class="score-mods">DT(1.8x) HD DA(AR8.9  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#ff79c6">loved</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="loved" style="color:#ff79c6"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 12.5C7 12.5 1 8.5 1 4.5C1 2.567 2.567 1 4.5 1C5.6 1 6.6 1.55 7 2.3C7.4 1.55 8.4 1 9.5 1C11.433 1 13 2.567 13 4.5C13 8.5 7 12.5 7 12.5Z" stroke="#ff79c6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:3.92s">
             <div class="score-rank ">99</div>
@@ -3109,10 +3125,10 @@ body::after {
                     <span class="score-combo">3,109x</span>
                     <span class="score-hits"><span class="stat-miss">2✗</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.5  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:3.96s">
             <div class="score-rank ">100</div>
@@ -3136,10 +3152,10 @@ body::after {
                     <span class="score-combo">1,555x</span>
                     <span class="score-hits"><span class="stat-100">6×100</span></span>
                     <span class="score-mods">DT(1.9x) HD DA(AR8.7  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#ff79c6">loved</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="loved" style="color:#ff79c6"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 12.5C7 12.5 1 8.5 1 4.5C1 2.567 2.567 1 4.5 1C5.6 1 6.6 1.55 7 2.3C7.4 1.55 8.4 1 9.5 1C11.433 1 13 2.567 13 4.5C13 8.5 7 12.5 7 12.5Z" stroke="#ff79c6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:4.00s">
             <div class="score-rank ">101</div>
@@ -3163,10 +3179,10 @@ body::after {
                     <span class="score-combo">1,025x</span>
                     <span class="score-hits"><span class="stat-miss">2✗</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.5  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:4.04s">
             <div class="score-rank ">102</div>
@@ -3190,10 +3206,10 @@ body::after {
                     <span class="score-combo">1,546x</span>
                     <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.5  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:4.08s">
             <div class="score-rank ">103</div>
@@ -3217,10 +3233,10 @@ body::after {
                     <span class="score-combo">549x</span>
                     <span class="score-hits"><span class="stat-miss">1✗</span> <span class="stat-100">1×100</span></span>
                     <span class="score-mods">DT(1.8x) HD DA(AR9.1  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:4.12s">
             <div class="score-rank ">104</div>
@@ -3244,10 +3260,10 @@ body::after {
                     <span class="score-combo">2,798x</span>
                     <span class="score-hits"><span class="stat-100">1×100</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.6  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:4.16s">
             <div class="score-rank ">105</div>
@@ -3271,10 +3287,10 @@ body::after {
                     <span class="score-combo">568x</span>
                     <span class="score-hits"><span class="stat-miss">5✗</span></span>
                     <span class="score-mods">DT HD DA(AR9.7  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:4.20s">
             <div class="score-rank ">106</div>
@@ -3298,10 +3314,10 @@ body::after {
                     <span class="score-combo">895x</span>
                     <span class="score-hits"><span class="stat-miss">1✗</span></span>
                     <span class="score-mods">NC HD DA(AR9.6  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#ff79c6">loved</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="loved" style="color:#ff79c6"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 12.5C7 12.5 1 8.5 1 4.5C1 2.567 2.567 1 4.5 1C5.6 1 6.6 1.55 7 2.3C7.4 1.55 8.4 1 9.5 1C11.433 1 13 2.567 13 4.5C13 8.5 7 12.5 7 12.5Z" stroke="#ff79c6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:4.24s">
             <div class="score-rank ">107</div>
@@ -3325,10 +3341,10 @@ body::after {
                     <span class="score-combo">817x</span>
                     <span class="score-hits"><span class="stat-miss">1✗</span></span>
                     <span class="score-mods">DT(1.9x) HD DA(AR8.7  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:4.28s">
             <div class="score-rank ">108</div>
@@ -3352,10 +3368,10 @@ body::after {
                     <span class="score-combo">721x</span>
                     <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.6  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:4.32s">
             <div class="score-rank ">109</div>
@@ -3379,10 +3395,10 @@ body::after {
                     <span class="score-combo">738x</span>
                     <span class="score-hits"><span class="stat-miss">5✗</span></span>
                     <span class="score-mods">DT HD DA(AR9.7  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#ff79c6">loved</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="loved" style="color:#ff79c6"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 12.5C7 12.5 1 8.5 1 4.5C1 2.567 2.567 1 4.5 1C5.6 1 6.6 1.55 7 2.3C7.4 1.55 8.4 1 9.5 1C11.433 1 13 2.567 13 4.5C13 8.5 7 12.5 7 12.5Z" stroke="#ff79c6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:4.36s">
             <div class="score-rank ">110</div>
@@ -3406,10 +3422,10 @@ body::after {
                     <span class="score-combo">991x</span>
                     <span class="score-hits"><span class="stat-miss">7✗</span> <span class="stat-100">11×100</span> <span class="stat-50">2×50</span></span>
                     <span class="score-mods">DT(1.9x) HD DA(AR8.8  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:4.40s">
             <div class="score-rank ">111</div>
@@ -3433,10 +3449,10 @@ body::after {
                     <span class="score-combo">1,171x</span>
                     <span class="score-hits"><span class="stat-100">2×100</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.6  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:4.44s">
             <div class="score-rank ">112</div>
@@ -3460,10 +3476,10 @@ body::after {
                     <span class="score-combo">1,589x</span>
                     <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.6  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:4.48s">
             <div class="score-rank ">113</div>
@@ -3487,10 +3503,10 @@ body::after {
                     <span class="score-combo">1,932x</span>
                     <span class="score-hits"><span class="stat-miss">1✗</span> <span class="stat-100">2×100</span></span>
                     <span class="score-mods">DT(1.8x) HD DA(AR9  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:4.52s">
             <div class="score-rank ">114</div>
@@ -3514,10 +3530,10 @@ body::after {
                     <span class="score-combo">670x</span>
                     <span class="score-hits"><span class="stat-miss">2✗</span></span>
                     <span class="score-mods">DT HD DA(AR9.7  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:4.56s">
             <div class="score-rank ">115</div>
@@ -3541,10 +3557,10 @@ body::after {
                     <span class="score-combo">621x</span>
                     <span class="score-hits"><span class="stat-miss">3✗</span> <span class="stat-100">1×100</span></span>
                     <span class="score-mods">DT(1.8x) HD DA(AR9.1  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:4.60s">
             <div class="score-rank ">116</div>
@@ -3568,10 +3584,10 @@ body::after {
                     <span class="score-combo">1,826x</span>
                     <span class="score-hits"><span class="stat-miss">2✗</span></span>
                     <span class="score-mods">DT HD DA(AR9.7  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:4.64s">
             <div class="score-rank ">117</div>
@@ -3595,10 +3611,10 @@ body::after {
                     <span class="score-combo">1,829x</span>
                     <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.5  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:4.68s">
             <div class="score-rank ">118</div>
@@ -3622,10 +3638,10 @@ body::after {
                     <span class="score-combo">545x</span>
                     <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.5  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:4.72s">
             <div class="score-rank ">119</div>
@@ -3649,10 +3665,10 @@ body::after {
                     <span class="score-combo">1,177x</span>
                     <span class="score-hits"><span class="stat-miss">3✗</span> <span class="stat-100">4×100</span></span>
                     <span class="score-mods">DT(1.8x) HD DA(AR9  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#ff79c6">loved</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="loved" style="color:#ff79c6"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 12.5C7 12.5 1 8.5 1 4.5C1 2.567 2.567 1 4.5 1C5.6 1 6.6 1.55 7 2.3C7.4 1.55 8.4 1 9.5 1C11.433 1 13 2.567 13 4.5C13 8.5 7 12.5 7 12.5Z" stroke="#ff79c6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:4.76s">
             <div class="score-rank ">120</div>
@@ -3676,10 +3692,10 @@ body::after {
                     <span class="score-combo">1,599x</span>
                     <span class="score-hits"><span class="stat-miss">4✗</span> <span class="stat-100">1×100</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.6  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:4.80s">
             <div class="score-rank ">121</div>
@@ -3703,10 +3719,10 @@ body::after {
                     <span class="score-combo">491x</span>
                     <span class="score-hits"><span class="stat-miss">3✗</span></span>
                     <span class="score-mods">DT(1.8x) HD DA(AR9.1  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#ff79c6">loved</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="loved" style="color:#ff79c6"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 12.5C7 12.5 1 8.5 1 4.5C1 2.567 2.567 1 4.5 1C5.6 1 6.6 1.55 7 2.3C7.4 1.55 8.4 1 9.5 1C11.433 1 13 2.567 13 4.5C13 8.5 7 12.5 7 12.5Z" stroke="#ff79c6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:4.84s">
             <div class="score-rank ">122</div>
@@ -3730,10 +3746,10 @@ body::after {
                     <span class="score-combo">392x</span>
                     <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">DT(1.9x) HD DA(AR8.9  OD0  CS0  HP0) MR RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:4.88s">
             <div class="score-rank ">123</div>
@@ -3757,10 +3773,10 @@ body::after {
                     <span class="score-combo">1,463x</span>
                     <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.5  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:4.92s">
             <div class="score-rank ">124</div>
@@ -3784,10 +3800,10 @@ body::after {
                     <span class="score-combo">2,350x</span>
                     <span class="score-hits"><span class="stat-miss">1✗</span> <span class="stat-100">3×100</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.6  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:4.96s">
             <div class="score-rank ">125</div>
@@ -3811,10 +3827,10 @@ body::after {
                     <span class="score-combo">951x</span>
                     <span class="score-hits"><span class="stat-miss">9✗</span></span>
                     <span class="score-mods">DT HD DA(AR9.6  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#ff79c6">loved</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="loved" style="color:#ff79c6"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 12.5C7 12.5 1 8.5 1 4.5C1 2.567 2.567 1 4.5 1C5.6 1 6.6 1.55 7 2.3C7.4 1.55 8.4 1 9.5 1C11.433 1 13 2.567 13 4.5C13 8.5 7 12.5 7 12.5Z" stroke="#ff79c6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:5.00s">
             <div class="score-rank ">126</div>
@@ -3838,10 +3854,10 @@ body::after {
                     <span class="score-combo">651x</span>
                     <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.6  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:5.04s">
             <div class="score-rank ">127</div>
@@ -3865,10 +3881,10 @@ body::after {
                     <span class="score-combo">184x</span>
                     <span class="score-hits"><span class="stat-miss">1✗</span> <span class="stat-100">1×100</span></span>
                     <span class="score-mods">DT(1.6x) HD DA(AR9.5  OD0  CS0  HP0) MR RX</span>
-                    <span class="score-status" style="color:#ff79c6">loved</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="loved" style="color:#ff79c6"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 12.5C7 12.5 1 8.5 1 4.5C1 2.567 2.567 1 4.5 1C5.6 1 6.6 1.55 7 2.3C7.4 1.55 8.4 1 9.5 1C11.433 1 13 2.567 13 4.5C13 8.5 7 12.5 7 12.5Z" stroke="#ff79c6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:5.08s">
             <div class="score-rank ">128</div>
@@ -3892,10 +3908,10 @@ body::after {
                     <span class="score-combo">1,197x</span>
                     <span class="score-hits"><span class="stat-miss">3✗</span></span>
                     <span class="score-mods">DT(1.9x) HD DA(AR8.7  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:5.12s">
             <div class="score-rank ">129</div>
@@ -3919,10 +3935,10 @@ body::after {
                     <span class="score-combo">1,099x</span>
                     <span class="score-hits"><span class="stat-miss">6✗</span> <span class="stat-100">1×100</span></span>
                     <span class="score-mods">DT HD DA(AR9.6  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:5.16s">
             <div class="score-rank ">130</div>
@@ -3946,10 +3962,10 @@ body::after {
                     <span class="score-combo">1,101x</span>
                     <span class="score-hits"><span class="stat-miss">13✗</span> <span class="stat-100">4×100</span></span>
                     <span class="score-mods">DT(1.9x) HD DA(AR8.8  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:5.20s">
             <div class="score-rank ">131</div>
@@ -3973,10 +3989,10 @@ body::after {
                     <span class="score-combo">900x</span>
                     <span class="score-hits"><span class="stat-miss">4✗</span> <span class="stat-100">1×100</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.5  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:5.24s">
             <div class="score-rank ">132</div>
@@ -4000,10 +4016,10 @@ body::after {
                     <span class="score-combo">733x</span>
                     <span class="score-hits"><span class="stat-miss">8✗</span></span>
                     <span class="score-mods">DT(1.8x) HD DA(AR9  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#ff79c6">loved</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="loved" style="color:#ff79c6"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 12.5C7 12.5 1 8.5 1 4.5C1 2.567 2.567 1 4.5 1C5.6 1 6.6 1.55 7 2.3C7.4 1.55 8.4 1 9.5 1C11.433 1 13 2.567 13 4.5C13 8.5 7 12.5 7 12.5Z" stroke="#ff79c6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:5.28s">
             <div class="score-rank ">133</div>
@@ -4027,10 +4043,10 @@ body::after {
                     <span class="score-combo">1,533x</span>
                     <span class="score-hits"><span class="stat-100">1×100</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.5  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:5.32s">
             <div class="score-rank ">134</div>
@@ -4054,10 +4070,10 @@ body::after {
                     <span class="score-combo">775x</span>
                     <span class="score-hits"><span class="stat-miss">9✗</span> <span class="stat-100">2×100</span></span>
                     <span class="score-mods">DT(1.9x) HD DA(AR8.8  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:5.36s">
             <div class="score-rank ">135</div>
@@ -4081,10 +4097,10 @@ body::after {
                     <span class="score-combo">532x</span>
                     <span class="score-hits"><span class="stat-miss">3✗</span></span>
                     <span class="score-mods">DT(1.6x) HD DA(AR9.5  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#ff79c6">loved</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="loved" style="color:#ff79c6"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 12.5C7 12.5 1 8.5 1 4.5C1 2.567 2.567 1 4.5 1C5.6 1 6.6 1.55 7 2.3C7.4 1.55 8.4 1 9.5 1C11.433 1 13 2.567 13 4.5C13 8.5 7 12.5 7 12.5Z" stroke="#ff79c6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:5.40s">
             <div class="score-rank ">136</div>
@@ -4108,10 +4124,10 @@ body::after {
                     <span class="score-combo">2,435x</span>
                     <span class="score-hits"><span class="stat-100">1×100</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.5  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#ff79c6">loved</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="loved" style="color:#ff79c6"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 12.5C7 12.5 1 8.5 1 4.5C1 2.567 2.567 1 4.5 1C5.6 1 6.6 1.55 7 2.3C7.4 1.55 8.4 1 9.5 1C11.433 1 13 2.567 13 4.5C13 8.5 7 12.5 7 12.5Z" stroke="#ff79c6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:5.44s">
             <div class="score-rank ">137</div>
@@ -4135,10 +4151,10 @@ body::after {
                     <span class="score-combo">449x</span>
                     <span class="score-hits"><span class="stat-miss">4✗</span> <span class="stat-100">4×100</span></span>
                     <span class="score-mods">DT(1.9x) HD DA(AR8.9  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:5.48s">
             <div class="score-rank ">138</div>
@@ -4162,10 +4178,10 @@ body::after {
                     <span class="score-combo">257x</span>
                     <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">DT(1.8x) HD DA(AR9.1  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:5.52s">
             <div class="score-rank ">139</div>
@@ -4189,10 +4205,10 @@ body::after {
                     <span class="score-combo">1,680x</span>
                     <span class="score-hits"><span class="stat-miss">3✗</span> <span class="stat-100">1×100</span></span>
                     <span class="score-mods">DT(1.8x) HD DA(AR9.1  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:5.56s">
             <div class="score-rank ">140</div>
@@ -4216,10 +4232,10 @@ body::after {
                     <span class="score-combo">816x</span>
                     <span class="score-hits"><span class="stat-100">1×100</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.5  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:5.60s">
             <div class="score-rank ">141</div>
@@ -4243,10 +4259,10 @@ body::after {
                     <span class="score-combo">543x</span>
                     <span class="score-hits"><span class="stat-100">1×100</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.5  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:5.64s">
             <div class="score-rank ">142</div>
@@ -4270,10 +4286,10 @@ body::after {
                     <span class="score-combo">1,412x</span>
                     <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">DT(1.6x) HD DA(AR9.4  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:5.68s">
             <div class="score-rank ">143</div>
@@ -4297,10 +4313,10 @@ body::after {
                     <span class="score-combo">527x</span>
                     <span class="score-hits"><span class="stat-fc">FC</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.6  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:5.72s">
             <div class="score-rank ">144</div>
@@ -4324,10 +4340,10 @@ body::after {
                     <span class="score-combo">341x</span>
                     <span class="score-hits"><span class="stat-miss">1✗</span></span>
                     <span class="score-mods">DT(1.8x) HD DA(AR9  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:5.76s">
             <div class="score-rank ">145</div>
@@ -4351,10 +4367,10 @@ body::after {
                     <span class="score-combo">1,528x</span>
                     <span class="score-hits"><span class="stat-100">1×100</span></span>
                     <span class="score-mods">DT(1.7x) HD DA(AR9.2  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:5.80s">
             <div class="score-rank ">146</div>
@@ -4378,10 +4394,10 @@ body::after {
                     <span class="score-combo">1,286x</span>
                     <span class="score-hits"><span class="stat-miss">1✗</span></span>
                     <span class="score-mods">DT HD DA(AR9.7  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#ff79c6">loved</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="loved" style="color:#ff79c6"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 12.5C7 12.5 1 8.5 1 4.5C1 2.567 2.567 1 4.5 1C5.6 1 6.6 1.55 7 2.3C7.4 1.55 8.4 1 9.5 1C11.433 1 13 2.567 13 4.5C13 8.5 7 12.5 7 12.5Z" stroke="#ff79c6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:5.84s">
             <div class="score-rank ">147</div>
@@ -4405,10 +4421,10 @@ body::after {
                     <span class="score-combo">1,787x</span>
                     <span class="score-hits"><span class="stat-miss">2✗</span> <span class="stat-100">1×100</span></span>
                     <span class="score-mods">DT(1.7x) HD DA(AR9.2  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:5.88s">
             <div class="score-rank ">148</div>
@@ -4432,10 +4448,10 @@ body::after {
                     <span class="score-combo">654x</span>
                     <span class="score-hits"><span class="stat-miss">6✗</span> <span class="stat-100">5×100</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.6  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:5.92s">
             <div class="score-rank ">149</div>
@@ -4459,10 +4475,10 @@ body::after {
                     <span class="score-combo">736x</span>
                     <span class="score-hits"><span class="stat-miss">1✗</span> <span class="stat-100">3×100</span> <span class="stat-50">1×50</span></span>
                     <span class="score-mods">DT(1.9x) HD DA(AR8.8  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:5.96s">
             <div class="score-rank ">150</div>
@@ -4486,10 +4502,10 @@ body::after {
                     <span class="score-combo">2,494x</span>
                     <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.5  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:6.00s">
             <div class="score-rank ">151</div>
@@ -4513,10 +4529,10 @@ body::after {
                     <span class="score-combo">604x</span>
                     <span class="score-hits"><span class="stat-100">2×100</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.6  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:6.04s">
             <div class="score-rank ">152</div>
@@ -4540,10 +4556,10 @@ body::after {
                     <span class="score-combo">972x</span>
                     <span class="score-hits"><span class="stat-100">2×100</span></span>
                     <span class="score-mods">DT(1.9x) HD DA(AR8.8  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:6.08s">
             <div class="score-rank ">153</div>
@@ -4567,10 +4583,10 @@ body::after {
                     <span class="score-combo">686x</span>
                     <span class="score-hits"><span class="stat-miss">13✗</span> <span class="stat-100">2×100</span></span>
                     <span class="score-mods">DT HD DA(AR9.7  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:6.12s">
             <div class="score-rank ">154</div>
@@ -4594,10 +4610,10 @@ body::after {
                     <span class="score-combo">2,475x</span>
                     <span class="score-hits"><span class="stat-100">1×100</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.6  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:6.16s">
             <div class="score-rank ">155</div>
@@ -4621,10 +4637,10 @@ body::after {
                     <span class="score-combo">1,168x</span>
                     <span class="score-hits"><span class="stat-miss">5✗</span></span>
                     <span class="score-mods">DT(1.9x) HD DA(AR8.8  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:6.20s">
             <div class="score-rank ">156</div>
@@ -4648,10 +4664,10 @@ body::after {
                     <span class="score-combo">1,717x</span>
                     <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.5  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:6.24s">
             <div class="score-rank ">157</div>
@@ -4675,10 +4691,10 @@ body::after {
                     <span class="score-combo">745x</span>
                     <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">DT(1.6x) HD DA(AR9.6  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:6.28s">
             <div class="score-rank ">158</div>
@@ -4702,10 +4718,10 @@ body::after {
                     <span class="score-combo">533x</span>
                     <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.5  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:6.32s">
             <div class="score-rank ">159</div>
@@ -4729,10 +4745,10 @@ body::after {
                     <span class="score-combo">525x</span>
                     <span class="score-hits"><span class="stat-miss">7✗</span> <span class="stat-100">1×100</span></span>
                     <span class="score-mods">DT(1.6x) HD DA(AR9.5  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:6.36s">
             <div class="score-rank ">160</div>
@@ -4756,10 +4772,10 @@ body::after {
                     <span class="score-combo">1,985x</span>
                     <span class="score-hits"><span class="stat-100">1×100</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.5  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:6.40s">
             <div class="score-rank ">161</div>
@@ -4783,10 +4799,10 @@ body::after {
                     <span class="score-combo">2,103x</span>
                     <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.6  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:6.44s">
             <div class="score-rank ">162</div>
@@ -4810,10 +4826,10 @@ body::after {
                     <span class="score-combo">657x</span>
                     <span class="score-hits"><span class="stat-miss">8✗</span> <span class="stat-100">1×100</span></span>
                     <span class="score-mods">DT(1.7x) HD DA(AR9.3  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:6.48s">
             <div class="score-rank ">163</div>
@@ -4837,10 +4853,10 @@ body::after {
                     <span class="score-combo">246x</span>
                     <span class="score-hits"><span class="stat-miss">1✗</span></span>
                     <span class="score-mods">DT(1.9x) HD DA(AR8.7  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:6.52s">
             <div class="score-rank ">164</div>
@@ -4864,10 +4880,10 @@ body::after {
                     <span class="score-combo">1,094x</span>
                     <span class="score-hits"><span class="stat-miss">2✗</span></span>
                     <span class="score-mods">DT(1.8x) HD DA(AR9.1  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:6.56s">
             <div class="score-rank ">165</div>
@@ -4891,10 +4907,10 @@ body::after {
                     <span class="score-combo">959x</span>
                     <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.6  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:6.60s">
             <div class="score-rank ">166</div>
@@ -4918,10 +4934,10 @@ body::after {
                     <span class="score-combo">1,177x</span>
                     <span class="score-hits"><span class="stat-miss">2✗</span> <span class="stat-100">6×100</span> <span class="stat-50">1×50</span></span>
                     <span class="score-mods">DT(1.8x) HD DA(AR9  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:6.64s">
             <div class="score-rank ">167</div>
@@ -4945,10 +4961,10 @@ body::after {
                     <span class="score-combo">1,703x</span>
                     <span class="score-hits"><span class="stat-miss">4✗</span> <span class="stat-100">1×100</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.6  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:6.68s">
             <div class="score-rank ">168</div>
@@ -4972,10 +4988,10 @@ body::after {
                     <span class="score-combo">1,260x</span>
                     <span class="score-hits"><span class="stat-miss">1✗</span> <span class="stat-100">1×100</span> <span class="stat-50">1×50</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.5  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:6.72s">
             <div class="score-rank ">169</div>
@@ -4999,10 +5015,10 @@ body::after {
                     <span class="score-combo">715x</span>
                     <span class="score-hits"><span class="stat-miss">8✗</span> <span class="stat-100">2×100</span></span>
                     <span class="score-mods">DT HD DA(AR9.6  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#ff79c6">loved</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="loved" style="color:#ff79c6"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 12.5C7 12.5 1 8.5 1 4.5C1 2.567 2.567 1 4.5 1C5.6 1 6.6 1.55 7 2.3C7.4 1.55 8.4 1 9.5 1C11.433 1 13 2.567 13 4.5C13 8.5 7 12.5 7 12.5Z" stroke="#ff79c6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:6.76s">
             <div class="score-rank ">170</div>
@@ -5026,10 +5042,10 @@ body::after {
                     <span class="score-combo">1,535x</span>
                     <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.7  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:6.80s">
             <div class="score-rank ">171</div>
@@ -5053,10 +5069,10 @@ body::after {
                     <span class="score-combo">316x</span>
                     <span class="score-hits"><span class="stat-miss">12✗</span> <span class="stat-100">5×100</span></span>
                     <span class="score-mods">DT HD DA(AR9.6  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#ff79c6">loved</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="loved" style="color:#ff79c6"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 12.5C7 12.5 1 8.5 1 4.5C1 2.567 2.567 1 4.5 1C5.6 1 6.6 1.55 7 2.3C7.4 1.55 8.4 1 9.5 1C11.433 1 13 2.567 13 4.5C13 8.5 7 12.5 7 12.5Z" stroke="#ff79c6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:6.84s">
             <div class="score-rank ">172</div>
@@ -5080,10 +5096,10 @@ body::after {
                     <span class="score-combo">625x</span>
                     <span class="score-hits"><span class="stat-miss">7✗</span></span>
                     <span class="score-mods">DT HD DA(AR9.7  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#ff79c6">loved</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="loved" style="color:#ff79c6"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 12.5C7 12.5 1 8.5 1 4.5C1 2.567 2.567 1 4.5 1C5.6 1 6.6 1.55 7 2.3C7.4 1.55 8.4 1 9.5 1C11.433 1 13 2.567 13 4.5C13 8.5 7 12.5 7 12.5Z" stroke="#ff79c6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:6.88s">
             <div class="score-rank ">173</div>
@@ -5107,10 +5123,10 @@ body::after {
                     <span class="score-combo">1,409x</span>
                     <span class="score-hits"><span class="stat-miss">2✗</span> <span class="stat-100">2×100</span></span>
                     <span class="score-mods">DT(1.6x) HD DA(AR9.5  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#ff79c6">loved</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="loved" style="color:#ff79c6"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 12.5C7 12.5 1 8.5 1 4.5C1 2.567 2.567 1 4.5 1C5.6 1 6.6 1.55 7 2.3C7.4 1.55 8.4 1 9.5 1C11.433 1 13 2.567 13 4.5C13 8.5 7 12.5 7 12.5Z" stroke="#ff79c6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:6.92s">
             <div class="score-rank ">174</div>
@@ -5134,10 +5150,10 @@ body::after {
                     <span class="score-combo">950x</span>
                     <span class="score-hits"><span class="stat-miss">3✗</span> <span class="stat-100">1×100</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.6  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:6.96s">
             <div class="score-rank ">175</div>
@@ -5161,10 +5177,10 @@ body::after {
                     <span class="score-combo">1,013x</span>
                     <span class="score-hits"><span class="stat-miss">5✗</span> <span class="stat-100">1×100</span></span>
                     <span class="score-mods">DT(1.8x) HD DA(AR8.9  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:7.00s">
             <div class="score-rank ">176</div>
@@ -5188,10 +5204,10 @@ body::after {
                     <span class="score-combo">570x</span>
                     <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.4  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:7.04s">
             <div class="score-rank ">177</div>
@@ -5215,10 +5231,10 @@ body::after {
                     <span class="score-combo">1,684x</span>
                     <span class="score-hits"><span class="stat-miss">1✗</span> <span class="stat-100">1×100</span></span>
                     <span class="score-mods">DT(1.6x) HD DA(AR9.5  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:7.08s">
             <div class="score-rank ">178</div>
@@ -5242,10 +5258,10 @@ body::after {
                     <span class="score-combo">364x</span>
                     <span class="score-hits"><span class="stat-miss">10✗</span></span>
                     <span class="score-mods">DT(1.8x) HD DA(AR9  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#ff79c6">loved</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="loved" style="color:#ff79c6"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 12.5C7 12.5 1 8.5 1 4.5C1 2.567 2.567 1 4.5 1C5.6 1 6.6 1.55 7 2.3C7.4 1.55 8.4 1 9.5 1C11.433 1 13 2.567 13 4.5C13 8.5 7 12.5 7 12.5Z" stroke="#ff79c6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:7.12s">
             <div class="score-rank ">179</div>
@@ -5269,10 +5285,10 @@ body::after {
                     <span class="score-combo">651x</span>
                     <span class="score-hits"><span class="stat-miss">3✗</span> <span class="stat-100">1×100</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.5  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:7.16s">
             <div class="score-rank ">180</div>
@@ -5296,10 +5312,10 @@ body::after {
                     <span class="score-combo">872x</span>
                     <span class="score-hits"><span class="stat-miss">3✗</span> <span class="stat-50">1×50</span></span>
                     <span class="score-mods">DT HD DA(AR9.6  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:7.20s">
             <div class="score-rank ">181</div>
@@ -5323,10 +5339,10 @@ body::after {
                     <span class="score-combo">261x</span>
                     <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">DT(1.8x) HD DA(AR9.1  OD0  CS0  HP0) MR RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:7.24s">
             <div class="score-rank ">182</div>
@@ -5350,10 +5366,10 @@ body::after {
                     <span class="score-combo">548x</span>
                     <span class="score-hits"><span class="stat-miss">1✗</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.7  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:7.28s">
             <div class="score-rank ">183</div>
@@ -5377,10 +5393,10 @@ body::after {
                     <span class="score-combo">628x</span>
                     <span class="score-hits"><span class="stat-100">2×100</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.6  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:7.32s">
             <div class="score-rank ">184</div>
@@ -5404,10 +5420,10 @@ body::after {
                     <span class="score-combo">2,489x</span>
                     <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.4  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:7.36s">
             <div class="score-rank ">185</div>
@@ -5431,10 +5447,10 @@ body::after {
                     <span class="score-combo">628x</span>
                     <span class="score-hits"><span class="stat-miss">1✗</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.5  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:7.40s">
             <div class="score-rank ">186</div>
@@ -5458,10 +5474,10 @@ body::after {
                     <span class="score-combo">1,473x</span>
                     <span class="score-hits"><span class="stat-100">2×100</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.6  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:7.44s">
             <div class="score-rank ">187</div>
@@ -5485,10 +5501,10 @@ body::after {
                     <span class="score-combo">381x</span>
                     <span class="score-hits"><span class="stat-miss">5✗</span> <span class="stat-100">6×100</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.5  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#ff79c6">loved</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="loved" style="color:#ff79c6"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 12.5C7 12.5 1 8.5 1 4.5C1 2.567 2.567 1 4.5 1C5.6 1 6.6 1.55 7 2.3C7.4 1.55 8.4 1 9.5 1C11.433 1 13 2.567 13 4.5C13 8.5 7 12.5 7 12.5Z" stroke="#ff79c6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:7.48s">
             <div class="score-rank ">188</div>
@@ -5512,10 +5528,10 @@ body::after {
                     <span class="score-combo">1,575x</span>
                     <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.7  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:7.52s">
             <div class="score-rank ">189</div>
@@ -5539,10 +5555,10 @@ body::after {
                     <span class="score-combo">717x</span>
                     <span class="score-hits"><span class="stat-miss">5✗</span> <span class="stat-100">1×100</span></span>
                     <span class="score-mods">DT(1.6x) HD DA(AR9.4  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#ff79c6">loved</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="loved" style="color:#ff79c6"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 12.5C7 12.5 1 8.5 1 4.5C1 2.567 2.567 1 4.5 1C5.6 1 6.6 1.55 7 2.3C7.4 1.55 8.4 1 9.5 1C11.433 1 13 2.567 13 4.5C13 8.5 7 12.5 7 12.5Z" stroke="#ff79c6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:7.56s">
             <div class="score-rank ">190</div>
@@ -5566,10 +5582,10 @@ body::after {
                     <span class="score-combo">263x</span>
                     <span class="score-hits"><span class="stat-100">2×100</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.7  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:7.60s">
             <div class="score-rank ">191</div>
@@ -5593,10 +5609,10 @@ body::after {
                     <span class="score-combo">589x</span>
                     <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.6  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:7.64s">
             <div class="score-rank ">192</div>
@@ -5620,10 +5636,10 @@ body::after {
                     <span class="score-combo">717x</span>
                     <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.5  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:7.68s">
             <div class="score-rank ">193</div>
@@ -5647,10 +5663,10 @@ body::after {
                     <span class="score-combo">2,774x</span>
                     <span class="score-hits"><span class="stat-100">2×100</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.5  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:7.72s">
             <div class="score-rank ">194</div>
@@ -5674,10 +5690,10 @@ body::after {
                     <span class="score-combo">1,666x</span>
                     <span class="score-hits"><span class="stat-miss">1✗</span></span>
                     <span class="score-mods">DT(1.6x) HD DA(AR9.4  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:7.76s">
             <div class="score-rank ">195</div>
@@ -5701,10 +5717,10 @@ body::after {
                     <span class="score-combo">472x</span>
                     <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">DT(1.9x) HD DA(AR8.9  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:7.80s">
             <div class="score-rank ">196</div>
@@ -5728,10 +5744,10 @@ body::after {
                     <span class="score-combo">933x</span>
                     <span class="score-hits"><span class="stat-fc">SS</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.5  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:7.84s">
             <div class="score-rank ">197</div>
@@ -5755,10 +5771,10 @@ body::after {
                     <span class="score-combo">634x</span>
                     <span class="score-hits"><span class="stat-miss">3✗</span> <span class="stat-100">2×100</span></span>
                     <span class="score-mods">DT HD DA(AR9.6  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:7.88s">
             <div class="score-rank ">198</div>
@@ -5782,10 +5798,10 @@ body::after {
                     <span class="score-combo">1,127x</span>
                     <span class="score-hits"><span class="stat-miss">3✗</span></span>
                     <span class="score-mods">DT(2x) HD DA(AR8.6  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:7.92s">
             <div class="score-rank ">199</div>
@@ -5809,10 +5825,10 @@ body::after {
                     <span class="score-combo">1,181x</span>
                     <span class="score-hits"><span class="stat-miss">6✗</span> <span class="stat-100">5×100</span></span>
                     <span class="score-mods">DT(1.9x) HD DA(AR8.8  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#ff79c6">loved</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="loved" style="color:#ff79c6"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 12.5C7 12.5 1 8.5 1 4.5C1 2.567 2.567 1 4.5 1C5.6 1 6.6 1.55 7 2.3C7.4 1.55 8.4 1 9.5 1C11.433 1 13 2.567 13 4.5C13 8.5 7 12.5 7 12.5Z" stroke="#ff79c6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="score-row" style="animation-delay:7.96s">
             <div class="score-rank ">200</div>
@@ -5836,10 +5852,10 @@ body::after {
                     <span class="score-combo">903x</span>
                     <span class="score-hits"><span class="stat-miss">2✗</span></span>
                     <span class="score-mods">DT(1.15x) HD DA(AR10.4  OD0  CS0  HP0) RX</span>
-                    <span class="score-status" style="color:#78e08f">ranked</span>
                 </div>
             </div>
             </div>
+            <div class="status-icon" title="ranked" style="color:#78e08f"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1L13 7L7 13M7 1L1 7L7 13M7 1V13" stroke="#78e08f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
     </div>
 
